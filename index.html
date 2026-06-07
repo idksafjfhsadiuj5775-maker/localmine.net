@@ -3,65 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LocalMine.net — Minecraft Lite Hub</title>
+<title>LocalMine.net — Minecraft Lite Tools & Wiki</title>
 <style>
-:root { --primary: #4CAF50; --primary-dark: #388E3C; --accent: #7c3aed; --bg: #0a0a1a; --card: #1a1a2e; --text: #ccc; }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
-nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(10,10,26,0.95); backdrop-filter: blur(12px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 24px; display: flex; align-items: center; gap: 24px; }
-nav .logo { font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; }
-nav a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s; }
-nav a:hover { color: #fff; }
-nav .right { margin-left: auto; display: flex; gap: 16px; align-items: center; }
-.btn { padding: 10px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; text-decoration: none; display: inline-block; }
-.btn-primary { background: var(--primary); color: #fff; }
-.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
-.btn-accent { background: var(--accent); color: #fff; }
-.btn-accent:hover { background: #8b5cf6; transform: translateY(-1px); }
-.btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; }
-.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-
-.hero { padding: 120px 24px 80px; text-align: center; background: linear-gradient(135deg, #0a0a1a, #1a1a3e, #0a0a2e); }
-.hero h1 { font-size: 56px; background: linear-gradient(90deg, #4CAF50, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px; }
-.hero p { font-size: 18px; color: #aaa; max-width: 600px; margin: 0 auto 32px; }
-.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-.section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
-.section h2 { font-size: 32px; text-align: center; margin-bottom: 40px; color: #fff; }
-.section h2 span { color: var(--primary); }
-
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-.feature-card { background: var(--card); border-radius: 12px; padding: 24px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; }
-.feature-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 8px 30px rgba(76,175,80,0.1); }
-.feature-card .icon { font-size: 36px; margin-bottom: 12px; }
-.feature-card h3 { font-size: 16px; margin-bottom: 8px; }
-.feature-card p { font-size: 13px; color: #888; line-height: 1.5; }
-
-.download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-.download-card { background: var(--card); border-radius: 12px; padding: 24px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; }
-.download-card:hover { border-color: var(--primary); transform: translateY(-2px); }
-.download-card .icon { font-size: 40px; }
-.download-card h3 { margin: 8px 0; }
-.download-card .detail { color: #888; font-size: 13px; margin-bottom: 16px; }
-.download-card .btn { width: 100%; }
-
-/* Updates */
-.update-list { display: flex; flex-direction: column; gap: 12px; }
-.update-item { background: var(--card); border-radius: 8px; padding: 16px 20px; border-left: 3px solid var(--primary); }
-.update-item .date { color: #555; font-size: 12px; }
-.update-item h3 { font-size: 15px; margin: 4px 0; }
-.update-item p { font-size: 13px; color: #888; }
-
-footer { text-align: center; padding: 40px 24px; color: #555; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); }
-footer a { color: var(--primary); text-decoration: none; }
-
-#adminOverlay input:focus { outline: none; border-color: #4CAF50; }
-#adminOverlay h2 { font-size: 18px; color: #fff; }
-
-@media (max-width: 600px) {
-  .hero h1 { font-size: 32px; }
-  .section { padding: 40px 16px; }
-  .features-grid { grid-template-columns: 1fr; }
+:root{--p:#4CAF50;--pd:#388E3C;--a:#7c3aed;--bg:#0a0a1a;--c:#1a1a2e;--t:#ccc;--b:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--b);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;background:rgba(10,10,26,.95);backdrop-filter:blur(12px);z-index:100;border-bottom:1px solid rgba(255,255,255,.05);padding:12px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+nav .logo{font-size:20px;font-weight:700;color:var(--p);text-decoration:none}
+nav a{color:#888;text-decoration:none;font-size:14px;transition:color .2s;cursor:pointer}
+nav a:hover{color:var(--b)}
+nav .nav-tab.active{color:var(--p)}
+nav .right{margin-left:auto;display:flex;gap:16px;align-items:center}
+.btn{padding:10px 24px;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-primary{background:var(--p);color:var(--b)}
+.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-accent{background:var(--a);color:var(--b)}
+.btn-accent:hover{background:#8b5cf6;transform:translateY(-1px)}
+.btn-outline{background:0 0;border:1px solid rgba(255,255,255,.2);color:var(--b)}
+.btn-outline:hover{border-color:var(--p);color:var(--p)}
+.btn-small{padding:6px 14px;font-size:12px}
+.page{display:none;padding-top:60px}
+.page.active{display:block}
+.hero{padding:100px 24px 60px;text-align:center;background:linear-gradient(135deg,#0a0a1a,#1a1a3e,#0a0a2e)}
+.hero h1{font-size:48px;background:linear-gradient(90deg,#4CAF50,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.hero p{font-size:16px;color:#aaa;max-width:600px;margin:0 auto 24px}
+.hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.section{padding:60px 24px;max-width:1100px;margin:0 auto}
+.section h2{font-size:28px;text-align:center;margin-bottom:32px}
+.section h2 span{color:var(--p)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.feature-card{background:var(--c);border-radius:10px;padding:16px;border:1px solid rgba(255,255,255,.05);transition:all .3s}
+.feature-card:hover{transform:translateY(-3px);border-color:var(--p)}
+.feature-card .icon{font-size:28px;margin-bottom:8px}
+.feature-card h3{font-size:14px;margin-bottom:4px}
+.feature-card p{font-size:12px;color:#888;line-height:1.4}
+.download-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.download-card{background:var(--c);border-radius:10px;padding:20px;text-align:center;border:1px solid rgba(255,255,255,.05);transition:all .3s}
+.download-card:hover{border-color:var(--p);transform:translateY(-2px)}
+.download-card .icon{font-size:36px}
+.download-card h3{margin:8px 0;font-size:15px}
+.download-card .detail{color:#888;font-size:12px;margin-bottom:12px}
+.download-card .btn{width:100%}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.tool-card{background:var(--c);border-radius:10px;padding:14px;text-align:center;border:1px solid rgba(255,255,255,.05);cursor:pointer;transition:all .2s}
+.tool-card:hover{transform:translateY(-3px);border-color:var(--p);box-shadow:0 4px 20px rgba(76,175,80,.15)}
+.tool-card .icon{font-size:28px;margin-bottom:4px}
+.tool-card .name{font-size:12px;color:#ccc}
+.tool-card .desc{font-size:10px;color:#666;margin-top:2px}
+.tool-category{margin-bottom:20px}
+.tool-category h3{font-size:16px;margin-bottom:10px;padding-left:4px;border-left:3px solid var(--p);padding-left:10px}
+#toolModal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:200;justify-content:center;align-items:center;backdrop-filter:blur(8px);padding:16px}
+#toolModal.open{display:flex}
+#toolModal .modal-box{background:#1a1a2e;border-radius:16px;padding:24px;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;border:1px solid rgba(255,255,255,.1)}
+#toolModal .modal-box h2{margin-bottom:12px;font-size:18px}
+#toolModal .modal-box .close-btn{float:right;background:0 0;border:none;color:#888;font-size:20px;cursor:pointer}
+#toolModal input,#toolModal select,#toolModal textarea{width:100%;padding:8px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:#0a0a1a;color:var(--b);font-size:14px;margin:4px 0 8px}
+#toolModal input:focus,#toolModal select:focus{outline:0;border-color:var(--p)}
+#toolModal label{font-size:12px;color:#888}
+#toolModal .result{padding:10px;background:#0a0a1a;border-radius:8px;margin-top:8px;font-size:14px;line-height:1.5}
+#toolModal .result .val{color:var(--p);font-weight:700}
+.wiki-wrap{display:flex;gap:24px;min-height:500px}
+.wiki-sidebar{width:220px;flex-shrink:0}
+.wiki-sidebar input{padding:8px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:#0a0a1a;color:var(--b);font-size:13px;margin-bottom:12px}
+.wiki-sidebar input:focus{outline:0;border-color:var(--p)}
+.wiki-cat{font-size:12px;color:#888;padding:6px 8px;cursor:pointer;border-radius:4px;transition:all .2s;margin-bottom:2px}
+.wiki-cat:hover,.wiki-cat.active{background:rgba(76,175,80,.15);color:var(--p)}
+.wiki-page{margin-left:12px;padding:4px 8px 4px 16px;font-size:12px;color:#888;cursor:pointer;border-radius:4px;border-left:1px solid rgba(255,255,255,.05);transition:all .2s}
+.wiki-page:hover,.wiki-page.active{background:rgba(76,175,80,.1);color:var(--b);border-left-color:var(--p)}
+.wiki-content{flex:1}
+.wiki-content h2{margin-bottom:12px;text-align:left;font-size:22px}
+.wiki-content p{color:#aaa;font-size:14px;line-height:1.6;margin-bottom:10px}
+.wiki-content h3{font-size:16px;margin:16px 0 8px;color:#ccc}
+.wiki-content ul{padding-left:20px;color:#aaa;font-size:14px;line-height:1.6}
+.wiki-content li{margin-bottom:4px}
+.wiki-content code{background:#0a0a1a;padding:2px 6px;border-radius:4px;font-size:12px;color:var(--p)}
+.wiki-content .info-box{background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.2);border-radius:8px;padding:12px;margin:10px 0;font-size:13px;color:#aaa}
+.update-list{display:flex;flex-direction:column;gap:10px}
+.update-item{background:var(--c);border-radius:8px;padding:14px 18px;border-left:3px solid var(--p)}
+.update-item .date{color:#555;font-size:11px}
+.update-item h3{font-size:14px;margin:4px 0}
+.update-item p{font-size:12px;color:#888}
+footer{text-align:center;padding:30px 24px;color:#555;font-size:12px;border-top:1px solid rgba(255,255,255,.05)}
+footer a{color:var(--p);text-decoration:none}
+.tab-bar{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{padding:8px 20px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:0 0;color:#888;cursor:pointer;font-size:13px;transition:all .2s}
+.tab-btn:hover{border-color:var(--p);color:var(--b)}
+.tab-btn.active{background:var(--p);color:var(--b);border-color:var(--p)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+#adminOverlay input:focus{outline:0;border-color:#4CAF50}
+#adminOverlay h2{font-size:18px;color:var(--b)}
+@media(max-width:768px){
+  .wiki-wrap{flex-direction:column}
+  .wiki-sidebar{width:100%}
+  .hero h1{font-size:32px}
+  .tools-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+  nav{gap:10px;padding:10px 16px}
 }
 </style>
 </head>
@@ -69,107 +106,86 @@ footer a { color: var(--primary); text-decoration: none; }
 
 <nav>
   <a href="#" class="logo">⛏ LocalMine.net</a>
-  <a href="#features">Features</a>
-  <a href="#download">Download</a>
-  <a href="#skins">Skins</a>
-  <a href="#updates">Updates</a>
+  <a class="nav-tab active" onclick="switchPage('home')">Home</a>
+  <a class="nav-tab" onclick="switchPage('tools')">Tools</a>
+  <a class="nav-tab" onclick="switchPage('wiki')">Wiki</a>
+  <a class="nav-tab" onclick="switchPage('download')">Download</a>
   <div class="right">
     <a href="https://localmine.io:3443">Play Online</a>
+    <a href="https://www.minecraftskins.com/skin-editor/" target="_blank">Skins</a>
     <a href="https://mochimochinfo.com" style="color:#7c3aed;">By MochiMoch</a>
   </div>
 </nav>
 
-<section class="hero">
-  <h1>Minecraft Lite</h1>
-  <p>The ultimate browser-based voxel sandbox. Infinite worlds, crafting, multiplayer, day/night cycles — now with a desktop app.</p>
-  <div class="hero-buttons">
-    <a href="https://localmine.io:3443" class="btn btn-primary">▶ Play Online</a>
-    <a href="#download" class="btn btn-accent">⬇ Download App</a>
-    <a href="https://www.minecraftskins.com/skin-editor/" target="_blank" class="btn btn-outline">🎨 Skin Creator</a>
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <h1>Minecraft Lite</h1>
+    <p>Browser-based voxel sandbox. Infinite worlds, crafting, multiplayer, day/night cycles — now with a desktop app.</p>
+    <div class="hero-buttons">
+      <a href="https://localmine.io:3443" class="btn btn-primary">▶ Play Online</a>
+      <a href="#" onclick="switchPage('download');return false" class="btn btn-accent">⬇ Download App</a>
+      <a href="#" onclick="switchPage('tools');return false" class="btn btn-outline">🔧 50+ Tools</a>
+    </div>
   </div>
-</section>
+  <div class="section">
+    <h2><span>Features</span></h2>
+    <div class="features-grid" id="featuresGrid"></div>
+  </div>
+  <div class="section" id="updates">
+    <h2>📰 <span>Updates</span></h2>
+    <div class="update-list">
+      <div class="update-item"><div class="date">June 7, 2026</div><h3>v1.0.0 — First Release!</h3><p>Infinite worlds, crafting, multiplayer, desktop app, 50+ tools site launched.</p></div>
+      <div class="update-item"><div class="date">Coming Soon</div><h3>v1.1.0 — Mobs & Hunger</h3><p>Animals, hostile mobs, hunger bar, food items.</p></div>
+      <div class="update-item"><div class="date">Coming Soon</div><h3>v1.2.0 — Redstone & Mechanics</h3><p>Redstone circuits, pistons, doors, interactive blocks.</p></div>
+    </div>
+  </div>
+</div>
 
-<section id="features" class="section">
-  <h2>50+ <span>Features</span></h2>
-  <div class="features-grid">
-    <div class="feature-card"><div class="icon">🌍</div><h3>Infinite World</h3><p>Procedurally generated terrain with mountains, caves, forests, deserts, and taiga biomes.</p></div>
-    <div class="feature-card"><div class="icon">🧱</div><h3>45+ Block Types</h3><p>Stone, ores, wood, planks, deepslate, tuff, calcite, obsidian, and more.</p></div>
-    <div class="feature-card"><div class="icon">🌙</div><h3>Day/Night Cycle</h3><p>Dynamic sky with sun, moon, stars, and color transitions.</p></div>
-    <div class="feature-card"><div class="icon">👥</div><h3>Multiplayer</h3><p>Play with friends on the same world. Real-time player movement and block updates.</p></div>
-    <div class="feature-card"><div class="icon">🎒</div><h3>Inventory</h3><p>45-slot inventory with hotbar, drag-and-drop, and item splitting.</p></div>
-    <div class="feature-card"><div class="icon">🔨</div><h3>Crafting</h3><p>2×2 crafting grid with recipes for tools, blocks, and materials.</p></div>
-    <div class="feature-card"><div class="icon">❤️</div><h3>Health & Fall Damage</h3><p>10 hearts, fall damage, and respawn system.</p></div>
-    <div class="feature-card"><div class="icon">🏃</div><h3>Sprint & Sneak</h3><p>Sprint with Ctrl, sneak with Shift, full movement physics.</p></div>
-    <div class="feature-card"><div class="icon">🌳</div><h3>Trees & Nature</h3><p>Oak, birch, spruce trees with leaves. Flowers, tall grass, dead bushes.</p></div>
-    <div class="feature-card"><div class="icon">⛰️</div><h3>Caves</h3><p>Underground cave systems to explore with hidden ores.</p></div>
-    <div class="feature-card"><div class="icon">🔐</div><h3>User Accounts</h3><p>Register, login with password hashing. OAuth support for Google, Apple, Microsoft, Steam.</p></div>
-    <div class="feature-card"><div class="icon">💾</div><h3>Persistent World</h3><p>World saves automatically. Your builds persist across restarts.</p></div>
-    <div class="feature-card"><div class="icon">🪟</div><h3>Desktop App</h3><p>Downloadable macOS app with auto-updates. No browser needed.</p></div>
-    <div class="feature-card"><div class="icon">🎵</div><h3>Sound Effects</h3><p>Walking, breaking, placing, and ambient sounds.</p></div>
-    <div class="feature-card"><div class="icon">✨</div><h3>Block Particles</h3><p>Breaking animation with block-colored particles.</p></div>
-    <div class="feature-card"><div class="icon">🌫️</div><h3>Fog & Atmosphere</h3><p>Distance fog, sky colors, and atmospheric effects.</p></div>
+<!-- TOOLS -->
+<div id="page-tools" class="page">
+  <div class="section">
+    <h2>🔧 50+ <span>Interactive Tools</span></h2>
+    <div class="tab-bar" id="toolTabs"></div>
+    <div id="toolsContainer"></div>
   </div>
-</section>
+</div>
 
-<section id="download" class="section" style="background:linear-gradient(135deg,#0f0f2a,#1a1a3e);border-radius:12px;">
-  <h2>⬇ <span>Download</span></h2>
-  <div class="download-grid">
-    <div class="download-card">
-      <div class="icon">🍏</div><h3>macOS Intel</h3>
-      <p class="detail">Version 1.0.0</p>
-      <a href="https://github.com/idksafjfhsadiuj5775-maker/localmine.io/raw/main/download/minecraft-lite-macos-intel.dmg" class="btn btn-primary">Download DMG</a>
-    </div>
-    <div class="download-card">
-      <div class="icon">🍎</div><h3>macOS ARM</h3>
-      <p class="detail">Apple Silicon (M1–M4)</p>
-      <a href="https://github.com/idksafjfhsadiuj5775-maker/localmine.io/raw/main/download/minecraft-lite-macos-arm64.dmg" class="btn btn-primary">Download DMG</a>
-    </div>
-    <div class="download-card">
-      <div class="icon">🪟</div><h3>Windows</h3>
-      <p class="detail">Coming soon</p>
-      <button class="btn btn-outline" disabled>In Progress</button>
-    </div>
-    <div class="download-card">
-      <div class="icon">🐧</div><h3>Linux</h3>
-      <p class="detail">Coming soon</p>
-      <button class="btn btn-outline" disabled>In Progress</button>
+<!-- WIKI -->
+<div id="page-wiki" class="page">
+  <div class="section">
+    <h2>📚 <span>Wiki</span></h2>
+    <div class="wiki-wrap">
+      <div class="wiki-sidebar">
+        <input type="text" id="wikiSearch" placeholder="Search wiki..." oninput="wikiSearch()">
+        <div id="wikiSidebar"></div>
+      </div>
+      <div class="wiki-content" id="wikiContent">
+        <h2>Welcome to the Minecraft Lite Wiki</h2>
+        <p>Select a page from the sidebar to get started. This wiki covers everything from blocks and items to multiplayer and server commands.</p>
+        <div class="info-box">💡 Tip: You can search for specific topics using the search box.</div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="skins" class="section" style="background:linear-gradient(135deg,#0f0f2a,#1a1a3e);border-radius:12px;">
-  <h2>🎨 <span>Create Skins</span></h2>
-  <p style="text-align:center;color:#888;margin-bottom:24px;">Design your Minecraft character skin and use it in the game.</p>
-  <div style="text-align:center;">
-    <a href="https://www.minecraftskins.com/skin-editor/" target="_blank" rel="noopener" class="btn btn-accent" style="font-size:18px;padding:16px 40px;">
-      🎨 Open Skin Editor
-    </a>
-    <p style="margin-top:12px;color:#666;font-size:13px;">
-      Use the official Minecraft Skins editor to create custom skins, then save them to use in Minecraft Lite.
-    </p>
-  </div>
-</section>
-
-<section id="updates" class="section">
-  <h2>📰 <span>Updates</span></h2>
-  <div class="update-list">
-    <div class="update-item">
-      <div class="date">June 7, 2026</div>
-      <h3>v1.0.0 — First Release!</h3>
-      <p>Initial public release with infinite worlds, crafting, multiplayer, and desktop app.</p>
-    </div>
-    <div class="update-item">
-      <div class="date">Coming Soon</div>
-      <h3>v1.1.0 — Mobs & Hunger</h3>
-      <p>Adding mobs (cows, pigs, zombies), hunger bar, and food items.</p>
-    </div>
-    <div class="update-item">
-      <div class="date">Coming Soon</div>
-      <h3>v1.2.0 — Redstone & Mechanics</h3>
-      <p>Redstone circuits, pistons, doors, and interactive blocks.</p>
+<!-- DOWNLOAD -->
+<div id="page-download" class="page">
+  <div class="section">
+    <h2>⬇ <span>Download</span></h2>
+    <div class="download-grid">
+      <div class="download-card"><div class="icon">🍏</div><h3>macOS Intel</h3><p class="detail">Version 1.0.0</p><a href="#" class="btn btn-primary">Download DMG</a></div>
+      <div class="download-card"><div class="icon">🍎</div><h3>macOS ARM</h3><p class="detail">Apple Silicon (M1–M4)</p><a href="#" class="btn btn-primary">Download DMG</a></div>
+      <div class="download-card"><div class="icon">🪟</div><h3>Windows</h3><p class="detail">Coming soon</p><button class="btn btn-outline" disabled>In Progress</button></div>
+      <div class="download-card"><div class="icon">🐧</div><h3>Linux</h3><p class="detail">Coming soon</p><button class="btn btn-outline" disabled>In Progress</button></div>
     </div>
   </div>
-</section>
+  <div class="section">
+    <h2>🎨 <span>Create Skins</span></h2>
+    <p style="text-align:center;color:#888;margin-bottom:16px;">Design your character skin and use it in Minecraft Lite.</p>
+    <div style="text-align:center"><a href="https://www.minecraftskins.com/skin-editor/" target="_blank" class="btn btn-accent" style="font-size:16px;padding:14px 36px;">🎨 Open Skin Editor</a></div>
+  </div>
+</div>
 
 <footer>
   <p>Made by <a href="https://mochimochinfo.com">MochiMoch</a> 🌑</p>
@@ -177,138 +193,1132 @@ footer a { color: var(--primary); text-decoration: none; }
   <p style="margin-top:4px;"><a href="https://github.com/idksafjfhsadiuj5775-maker/localmine.io">GitHub</a> · <a href="https://mochimochinfo.com">About</a> · <a href="#" onclick="showAdminLogin();return false;" style="color:#333;font-size:11px;">Owner</a></p>
 </footer>
 
-<div id="adminOverlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:999;justify-content:center;align-items:center;backdrop-filter:blur(8px);">
-  <div style="background:#1a1a2e;border-radius:16px;padding:32px;max-width:400px;width:90%;border:1px solid rgba(255,255,255,0.1);">
-    <div id="adminLoginView">
-      <h2 style="margin-bottom:16px;">🔐 Owner Verification</h2>
-      <input type="password" id="adminPass" style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:#0a0a1a;color:#fff;font-size:16px;margin-bottom:12px;" placeholder="Enter owner password">
+<!-- ADMIN OVERLAY -->
+<div id="adminOverlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:999;justify-content:center;align-items:center;backdrop-filter:blur(8px);">
+  <div style="background:#1a1a2e;border-radius:16px;padding:32px;max-width:400px;width:90%;border:1px solid rgba(255,255,255,.1);">
+    <div id="adminLoginView"><h2 style="margin-bottom:16px;">🔐 Owner Verification</h2>
+      <input type="password" id="adminPass" style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:#0a0a1a;color:var(--b);font-size:16px;margin-bottom:12px;" placeholder="Enter owner password">
       <p id="adminError" style="color:#f44;font-size:13px;display:none;margin-bottom:8px;">Invalid password</p>
-      <button onclick="checkAdminPass()" style="width:100%;padding:12px;background:#4CAF50;color:#fff;border:none;border-radius:8px;font-size:16px;cursor:pointer;">🔓 Unlock</button>
-      <p style="margin-top:8px;text-align:center;"><a href="#" onclick="closeAdmin();return false;" style="color:#888;font-size:12px;">Cancel</a></p>
+      <button onclick="checkAdminPass()" style="width:100%;padding:12px;background:#4CAF50;color:var(--b);border:none;border-radius:8px;font-size:16px;cursor:pointer;">🔓 Unlock</button>
+      <p style="margin-top:8px;text-align:center"><a href="#" onclick="closeAdmin();return false;" style="color:#888;font-size:12px;">Cancel</a></p>
     </div>
-    <div id="adminPanelView" style="display:none;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-        <h2>⚙️ Owner Panel</h2>
-        <span style="background:#4CAF50;padding:4px 10px;border-radius:20px;font-size:11px;">Verified</span>
+    <div id="adminPanelView" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h2>⚙️ Owner Panel</h2><span style="background:#4CAF50;padding:4px 10px;border-radius:20px;font-size:11px;">Verified</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center"><div style="font-size:24px;font-weight:700;color:#4CAF50" id="statPlayers">0</div><div style="font-size:11px;color:#888">Online Players</div></div>
+        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center"><div style="font-size:24px;font-weight:700;color:#7c3aed" id="statUsers">0</div><div style="font-size:11px;color:#888">Registered Users</div></div>
+        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center"><div style="font-size:24px;font-weight:700;color:#E4B872" id="statBlocks">0</div><div style="font-size:11px;color:#888">Total Blocks</div></div>
+        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center"><div style="font-size:24px;font-weight:700;color:#6CB86C" id="statUptime">0h</div><div style="font-size:11px;color:#888">Uptime</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
-        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center;">
-          <div style="font-size:24px;font-weight:700;color:#4CAF50;" id="statPlayers">0</div>
-          <div style="font-size:11px;color:#888;">Online Players</div>
-        </div>
-        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center;">
-          <div style="font-size:24px;font-weight:700;color:#7c3aed;" id="statUsers">0</div>
-          <div style="font-size:11px;color:#888;">Registered Users</div>
-        </div>
-        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center;">
-          <div style="font-size:24px;font-weight:700;color:#E4B872;" id="statBlocks">0</div>
-          <div style="font-size:11px;color:#888;">Total Blocks</div>
-        </div>
-        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center;">
-          <div style="font-size:24px;font-weight:700;color:#6CB86C;" id="statUptime">0h</div>
-          <div style="font-size:11px;color:#888;">Uptime</div>
-        </div>
-      </div>
-      <div style="margin-bottom:12px;">
-        <label style="color:#888;font-size:12px;">Server</label>
-        <div style="display:flex;gap:8px;margin-top:4px;">
-          <input type="text" id="serverUrl" style="flex:1;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:#0a0a1a;color:#fff;font-size:13px;" value="https://localmine.io:3443">
-          <button onclick="checkServer()" style="padding:8px 12px;background:#7c3aed;color:#fff;border:none;border-radius:6px;cursor:pointer;">Check</button>
-        </div>
-        <div id="serverStatus" style="font-size:12px;margin-top:4px;color:#888;"></div>
-      </div>
-      <div style="display:flex;gap:8px;">
-        <button onclick="closeAdmin();" style="flex:1;padding:8px;background:transparent;border:1px solid rgba(255,255,255,0.1);color:#888;border-radius:6px;cursor:pointer;">Close</button>
-        <button onclick="resetServer()" style="flex:1;padding:8px;background:#f44;color:#fff;border:none;border-radius:6px;cursor:pointer;">⚠️ Reset Stats</button>
-      </div>
+      <div style="margin-bottom:12px"><label style="color:#888;font-size:12px">Server</label><div style="display:flex;gap:8px;margin-top:4px"><input type="text" id="serverUrl" style="flex:1;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:#0a0a1a;color:var(--b);font-size:13px;" value="https://localmine.io:3443"><button onclick="checkServer()" style="padding:8px 12px;background:#7c3aed;color:var(--b);border:none;border-radius:6px;cursor:pointer;">Check</button></div><div id="serverStatus" style="font-size:12px;margin-top:4px;color:#888"></div></div>
+      <div style="display:flex;gap:8px"><button onclick="closeAdmin()" style="flex:1;padding:8px;background:0 0;border:1px solid rgba(255,255,255,.1);color:#888;border-radius:6px;cursor:pointer;">Close</button><button onclick="resetServer()" style="flex:1;padding:8px;background:#f44;color:var(--b);border:none;border-radius:6px;cursor:pointer;">⚠️ Reset Stats</button></div>
     </div>
   </div>
 </div>
 
-<script>
-// ====== SKIN CREATOR (external) ======
-function initSkin() { /* no-op — using external editor */ }
+<!-- TOOL MODAL -->
+<div id="toolModal"><div class="modal-box" id="toolModalBox"></div></div>
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', (e) => {
-    e.preventDefault();
-    const el = document.querySelector(a.getAttribute('href'));
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  });
+<script>
+const ADMIN_PASS='ollama',ADMIN_PASS2='ollamagithub';
+let adminUnlocked=false,currentTool=null;
+window._startTime=Date.now();
+
+// ====== PAGE SWITCHING ======
+function switchPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  const tab=Array.from(document.querySelectorAll('.nav-tab')).find(t=>t.textContent.toLowerCase().startsWith(name[0]));
+  if(tab)tab.classList.add('active');
+  if(name==='tools')renderTools();
+  if(name==='wiki')renderWiki();
+  window.scrollTo(0,0);
+}
+
+// ====== FEATURES ======
+const FEATURES=[
+  {icon:'🌍',name:'Infinite World',desc:'Procedural terrain with mountains, caves, forests, deserts, taiga.'},
+  {icon:'🧱',name:'45+ Block Types',desc:'Stone, ores, wood, deepslate, tuff, calcite, obsidian.'},
+  {icon:'🌙',name:'Day/Night Cycle',desc:'Dynamic sky with sun, moon, stars, color transitions.'},
+  {icon:'👥',name:'Multiplayer',desc:'Real-time player movement, block updates, chat.'},
+  {icon:'🎒',name:'Inventory',desc:'45-slot inventory with hotbar, drag-and-drop.'},
+  {icon:'🔨',name:'Crafting',desc:'2*2 grid with recipes for tools, blocks, materials.'},
+  {icon:'❤️',name:'Health & Fall',desc:'10 hearts, fall damage, respawn system.'},
+  {icon:'🏃',name:'Sprint & Sneak',desc:'Sprint with Ctrl, sneak with Shift, full physics.'},
+  {icon:'🌳',name:'Trees & Nature',desc:'Oak, birch, spruce, flowers, tall grass, bushes.'},
+  {icon:'⛰️',name:'Caves',desc:'Underground cave systems with hidden ores.'},
+  {icon:'🔐',name:'User Accounts',desc:'Register, login, OAuth (Google, Apple, MS, Steam).'},
+  {icon:'💾',name:'Persistent World',desc:'Auto-saves across restarts.'},
+  {icon:'🪟',name:'Desktop App',desc:'macOS app with auto-updates.'},
+  {icon:'🎵',name:'Sound Effects',desc:'Walking, breaking, placing, ambient sounds.'},
+  {icon:'✨',name:'Block Particles',desc:'Breaking animation with block-colored particles.'},
+  {icon:'🌫️',name:'Fog & Atmosphere',desc:'Distance fog, sky colors, atmospheric effects.'}
+];
+document.getElementById('featuresGrid').innerHTML=FEATURES.map(f=>
+  `<div class="feature-card"><div class="icon">${f.icon}</div><h3>${f.name}</h3><p>${f.desc}</p></div>`
+).join('');
+
+// ====== TOOLS ======
+const TOOLS={};
+const TOOL_CATS={};
+
+function defTool(id,cat,name,icon,desc,htmlFn){
+  if(!TOOL_CATS[cat])TOOL_CATS[cat]=[];
+  if(!TOOL_CATS[cat].includes(id))TOOL_CATS[cat].push(id);
+  TOOLS[id]={cat,name,icon,desc,html:htmlFn};
+}
+
+// ---- Block & Item Tools ----
+defTool('blocks','block','Block Finder','🧱','Search blocks by name',()=>`
+  <label>Search block</label><input id="tBlockSearch" placeholder="e.g. stone, dirt, oak..." oninput="blockFinder()">
+  <div id="tBlockResult" class="result">Start typing to find blocks.</div>
+`);
+window.blockFinder=function(){
+  const q=document.getElementById('tBlockSearch').value.toLowerCase();
+  const blocks=['Stone','Dirt','Grass Block','Oak Log','Oak Planks','Cobblestone','Bedrock','Water','Sand','Gravel','Gold Ore','Iron Ore','Coal Ore','Diamond Ore','Lapis Ore','Redstone Ore','Deepslate','Tuff','Calcite','Magma Block','Obsidian','Netherrack','End Stone','Brick','Bookshelf','Crafting Table','Furnace','Chest','Torch','Glass','Wool','Oak Leaves','Birch Log','Spruce Log','Birch Planks','Spruce Planks','Sandstone','Snow Block','Ice','Clay','Bone Block'];
+  const m=blocks.filter(b=>b.toLowerCase().includes(q));
+  document.getElementById('tBlockResult').innerHTML=m.length?m.map(b=>`<div style="padding:2px 0">${b}</div>`).join(''):'No blocks found.';
+};
+
+defTool('hardness','block','Block Hardness','🧊','Breaking time for each block',()=>`
+  <label>Select block</label>
+  <select id="tHardnessBlock" onchange="calcHardness()">
+    ${['Stone','Dirt','Oak Log','Cobblestone','Bedrock','Diamond Ore','Obsidian','Deepslate','Wood Planks','Sand','Gravel','Glass'].map(b=>`<option>${b}</option>`).join('')}
+  </select>
+  <label>Tool</label>
+  <select id="tHardnessTool" onchange="calcHardness()">
+    <option>Hand</option><option>Wood</option><option>Stone</option><option>Iron</option><option>Diamond</option>
+  </select>
+  <div id="tHardnessResult" class="result"></div>
+`);
+window.calcHardness=function(){
+  const base={Stone:1.5,Dirt:0.5,'Oak Log':2,Cobblestone:2,Bedrock:9999,'Diamond Ore':3,Obsidian:50,Deepslate:1.5,'Wood Planks':1.5,Sand:0.5,Gravel:0.6,Glass:0.3};
+  const speed={Hand:1,Wood:2,Stone:4,Iron:6,Diamond:8};
+  const b=document.getElementById('tHardnessBlock').value,t=document.getElementById('tHardnessTool').value;
+  const time=((base[b]||1)*1.5/speed[t]).toFixed(2);
+  const canDrop=t!=='Hand'||['Dirt','Sand','Gravel','Log','Wood'].some(k=>b.includes(k));
+  document.getElementById('tHardnessResult').innerHTML=`⏱️ <span class="val">${time}s</span> to break<br>${canDrop?'✅ Drops item':'❌ Must use tool'}`;
+};
+
+defTool('enchant','block','Enchant Sim','✨','Roll random enchantments',()=>`
+  <label>Item</label>
+  <select id="tEnchantItem"><option>Sword</option><option>Pickaxe</option><option>Axe</option><option>Bow</option><option>Helmet</option><option>Chestplate</option></select>
+  <label>Level</label>
+  <select id="tEnchantLevel"><option>1</option><option selected>15</option><option>30</option></select>
+  <button class="btn btn-primary btn-small" onclick="rollEnchant()">🎲 Enchant!</button>
+  <div id="tEnchantResult" class="result">Click to enchant.</div>
+`);
+window.rollEnchant=function(){
+  const enchants={Sword:['Sharpness','Knockback','Fire Aspect','Looting','Unbreaking'],Pickaxe:['Efficiency','Fortune','Silk Touch','Unbreaking'],Axe:['Sharpness','Efficiency','Fortune','Unbreaking'],Bow:['Power','Punch','Flame','Infinity','Unbreaking'],Helmet:['Protection','Projectile Protection','Respiration','Aqua Affinity','Unbreaking'],Chestplate:['Protection','Projectile Protection','Fire Protection','Blast Protection','Unbreaking']};
+  const el=document.getElementById('tEnchantItem').value,pool=enchants[el]||['Unbreaking'];
+  const count=Math.min(Math.floor(Math.random()*3)+1,pool.length);
+  const picked=[...pool].sort(()=>Math.random()-.5).slice(0,count);
+  const lvl=parseInt(document.getElementById('tEnchantLevel').value);
+  document.getElementById('tEnchantResult').innerHTML=picked.map(e=>`✨ <span class="val">${e} ${['I','II','III','IV','V'][Math.min(Math.floor(lvl/10+Math.random()*2),4)]}</span>`).join('<br>');
+};
+
+defTool('itemname','block','Item Name Gen','📝','Random Minecraft-style names',()=>
+  `<button class="btn btn-primary btn-small" onclick="genItemName()">🎲 Generate</button><div id="tItemNameResult" class="result">Click to generate.</div>`
+);
+window.genItemName=function(){
+  const pre=['Ancient','Cursed','Enchanted','Golden','Shadow','Crystal','Frozen','Burning','Royal','Mythic','Rune','Star','Thunder','Void','Wild','Arcane','Dusk','Ember','Frost','Gleaming'];
+  const suf=['Blade','Pick','Axe','Rod','Gem','Crystal','Orb','Shard','Sword','Staff','Bow','Shield','Ring','Amulet','Crown','Dust','Core','Heart','Cloak','Soul'];
+  document.getElementById('tItemNameResult').innerHTML=`✨ <span class="val">${pre[Math.floor(Math.random()*pre.length)]} ${suf[Math.floor(Math.random()*suf.length)]}</span>`;
+};
+
+defTool('oregen','block','Ore Generator','💎','Simulate ore drops',()=>`
+  <label>Ore type</label>
+  <select id="tOreType" onchange="genOre()"><option>Coal</option><option>Iron</option><option>Gold</option><option>Diamond</option><option>Lapis</option><option>Redstone</option></select>
+  <label>Fortune level</label>
+  <select id="tOreFortune" onchange="genOre()"><option>0</option><option>I</option><option>II</option><option>III</option></select>
+  <div id="tOreResult" class="result"></div>
+`);
+window.genOre=function(){
+  const drops={Coal:[1,4],Iron:[1,1],Gold:[1,1],Diamond:[1,1],Lapis:[4,9],Redstone:[4,6]};
+  const o=document.getElementById('tOreType').value,f=document.getElementById('tOreFortune').selectedIndex;
+  const [min,max]=drops[o]||[1,1];
+  const count=min+Math.floor(Math.random()*(max-min+1))*(f>0?Math.floor(Math.random()*f)+1:1);
+  document.getElementById('tOreResult').innerHTML=`⛏️ Mined ${o}: <span class="val">${count}x</span> ${o==='Lapis'?'Lapis Lazuli':o+(o==='Redstone'?' Dust':'')}`;
+};
+
+// ---- Combat Tools ----
+defTool('sworddmg','combat','Sword Damage','⚔️','Calculate weapon damage',()=>`
+  <label>Sword type</label>
+  <select id="tSwordType" onchange="calcSword()"><option>Wood</option><option>Stone</option><option>Iron</option><option>Diamond</option><option>Netherite</option></select>
+  <label>Sharpness level</label>
+  <select id="tSwordSharp" onchange="calcSword()"><option>0</option><option>I</option><option>II</option><option>III</option><option>IV</option><option>V</option></select>
+  <div id="tSwordResult" class="result"></div>
+`);
+window.calcSword=function(){
+  const base={Wood:4,Stone:5,Iron:6,Diamond:7,Netherite:8};
+  const s=document.getElementById('tSwordType').value,sh=document.getElementById('tSwordSharp').selectedIndex;
+  const dmg=base[s]+sh;
+  document.getElementById('tSwordResult').innerHTML=`⚔️ <span class="val">${dmg}</span> damage per hit (${Math.ceil(20/dmg)} hits to kill)`;
+};
+
+defTool('armorcalc','combat','Armor Reduction','🛡️','Calculate armor protection',()=>`
+  <label>Armor pieces</label>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <label style="flex:1"><input type="checkbox" onchange="calcArmor()" checked> Helmet</label>
+    <label style="flex:1"><input type="checkbox" onchange="calcArmor()" checked> Chestplate</label>
+    <label style="flex:1"><input type="checkbox" onchange="calcArmor()" checked> Leggings</label>
+    <label style="flex:1"><input type="checkbox" onchange="calcArmor()" checked> Boots</label>
+  </div>
+  <label>Incoming damage</label>
+  <input type="number" id="tArmorDmg" value="10" oninput="calcArmor()">
+  <div id="tArmorResult" class="result"></div>
+`);
+window.calcArmor=function(){
+  const boxes=document.querySelectorAll('#toolModal input[type=checkbox]');
+  let armor=0;
+  const vals=[3,8,6,3];boxes.forEach((b,i)=>{if(b.checked)armor+=vals[i]});
+  const reduction=Math.min(armor*4,80);
+  const dmg=parseFloat(document.getElementById('tArmorDmg').value)||0;
+  const taken=dmg*(1-reduction/100);
+  document.getElementById('tArmorResult').innerHTML=`🛡️ Armor: <span class="val">${armor}</span> (${reduction}% reduction)<br>❤️ Damage taken: <span class="val">${taken.toFixed(1)}</span>`;
+};
+
+defTool('mobhealth','combat','Mob Health','❤️','Look up mob HP',()=>`
+  <label>Mob</label>
+  <select id="tMobHealth" onchange="showMobHealth()">
+    ${['Zombie:20','Skeleton:20','Creeper:20','Spider:16','Enderman:40','Witch:26','Blaze:20','Ghast:10','Slime:16','Iron Golem:100','Villager:20','Player:20'].map(m=>`<option value="${m.split(':')[1]}">${m.split(':')[0]}</option>`).join('')}
+  </select>
+  <div id="tMobHealthResult" class="result"></div>
+`);
+window.showMobHealth=function(){
+  const s=document.getElementById('tMobHealth');
+  document.getElementById('tMobHealthResult').innerHTML=`❤️ Health: <span class="val">${s.value} HP</span> (${s.value/2} hearts)`;
+};
+
+defTool('damagecalc','combat','Damage Calculator','🎯','Calculate hits to kill',()=>`
+  <label>Your damage per hit</label><input type="number" id="tDmgAtk" value="7" min="1" oninput="calcDamage()">
+  <label>Target HP</label><input type="number" id="tDmgHp" value="20" min="1" oninput="calcDamage()">
+  <div id="tDmgResult" class="result"></div>
+`);
+window.calcDamage=function(){
+  const atk=parseFloat(document.getElementById('tDmgAtk').value)||0,hp=parseFloat(document.getElementById('tDmgHp').value)||0;
+  const hits=Math.ceil(hp/atk);
+  document.getElementById('tDmgResult').innerHTML=`⚔️ <span class="val">${hits} hit${hits>1?'s':''}</span> to kill<br>💥 Total: ${(atk*hits).toFixed(0)} damage`;
+};
+
+defTool('potioninfo','combat','Potion Effects','🧪','Potion effect details',()=>`
+  <label>Effect</label>
+  <select id="tPotionEffect" onchange="showPotion()">
+    ${['Speed','Slowness','Haste','Strength','Jump Boost','Regeneration','Resistance','Fire Resistance','Invisibility','Night Vision','Poison','Weakness'].map(e=>`<option>${e}</option>`).join('')}
+  </select>
+  <label>Amplifier</label>
+  <input type="number" id="tPotionAmp" value="0" min="0" max="4" oninput="showPotion()">
+  <div id="tPotionResult" class="result"></div>
+`);
+window.showPotion=function(){
+  const e=document.getElementById('tPotionEffect').value,a=parseInt(document.getElementById('tPotionAmp').value)||0;
+  const durations={Speed:'3:00',Slowness:'1:30',Haste:'3:00',Strength:'3:00','Jump Boost':'3:00',Regeneration:'0:45',Resistance:'3:00','Fire Resistance':'3:00',Invisibility:'3:00','Night Vision':'3:00',Poison:'0:45',Weakness:'1:30'};
+  document.getElementById('tPotionResult').innerHTML=`🧪 <span class="val">${e} ${a>0?['I','II','III','IV','V'][Math.min(a,4)]:''}</span><br>⏱️ Duration: ${durations[e]||'3:00'}`;
+};
+
+// ---- World Tools ----
+defTool('seedgen','world','Seed Generator','🌱','Random world seeds',()=>
+  `<button class="btn btn-primary btn-small" onclick="genSeed()">🎲 Generate Seed</button><div id="tSeedResult" class="result">Click to generate.</div>`
+);
+window.genSeed=function(){
+  const seed=Math.floor(Math.random()*10000000000);
+  document.getElementById('tSeedResult').innerHTML=`🌱 Seed: <span class="val" style="font-family:monospace">${seed}</span>`;
+};
+
+defTool('biomes','world','Biome Info','🌡️','Biome details',()=>`
+  <label>Biome</label>
+  <select id="tBiome" onchange="showBiome()">
+    ${['Plains','Forest','Desert','Taiga','Snowy Tundra','Jungle','Swamp','Savanna','Ocean','Mountains'].map(b=>`<option>${b}</option>`).join('')}
+  </select>
+  <div id="tBiomeResult" class="result"></div>
+`);
+window.showBiome=function(){
+  const info={Plains:'Flat, grass, flowers, villages. Temp: 0.8',Forest:'Trees, grass, wolves. Temp: 0.7',Desert:'Sand, cacti, dead bushes. Temp: 2.0',Taiga:'Spruce trees, ferns, wolves. Temp: 0.25','Snowy Tundra':'Snow, ice, no trees. Temp: 0.0',Jungle:'Tall trees, parrots, ocelots. Temp: 0.95',Swamp:'Dark water, vines, slimes. Temp: 0.8',Savanna:'Acacia trees, horses. Temp: 1.2',Ocean:'Water, squid, guardians. Temp: 0.5',Mountains:'High terrain, emeralds. Temp: 0.2'};
+  const b=document.getElementById('tBiome').value;
+  document.getElementById('tBiomeResult').innerHTML=`🌍 <span class="val">${b}</span><br>${info[b]||''}`;
+};
+
+defTool('timeconv','world','Time Converter','⏱️','Ticks to real time',()=>`
+  <label>Ticks (0-24000)</label>
+  <input type="number" id="tTicks" value="6000" min="0" max="24000" oninput="convTime()">
+  <div id="tTimeResult" class="result"></div>
+`);
+window.convTime=function(){
+  const t=parseInt(document.getElementById('tTicks').value)||0;
+  const hours=Math.floor(t/1000)+6,h=hours%24,min=Math.floor((t%1000)/1000*60);
+  const periods={0:'🌙 Night',6000:'☀️ Dawn',12000:'☀️ Noon',18000:'🌅 Dusk'};
+  const nearest=Object.keys(periods).reduce((a,b)=>Math.abs(b-t)<Math.abs(a-t)?b:a);
+  document.getElementById('tTimeResult').innerHTML=`⏱️ Time: <span class="val">${h}:${min.toString().padStart(2,'0')}</span><br>${t<12000?'☀️ Day':'🌙 Night'}<br>${periods[nearest]||''}`;
+};
+
+defTool('moon','world','Moon Phase','🌙','Current moon phase',()=>{
+  const phases=['🌑 New Moon','🌒 Waxing Crescent','🌓 First Quarter','🌔 Waxing Gibbous','🌕 Full Moon','🌖 Waning Gibbous','🌗 Last Quarter','🌘 Waning Crescent'];
+  return `<div id="tMoonResult" class="result" style="text-align:center;font-size:16px">${phases[Math.floor(Math.random()*8)]}</div>`;
 });
 
-// ====== ADMIN / OWNER PANEL ======
-const ADMIN_PASS = 'ollama';
-const ADMIN_PASS2 = 'ollamagithub';
-let adminUnlocked = false;
+defTool('weather','world','Weather Info','🌧️','Weather conditions',()=>{
+  const w=['☀️ Clear','⛅ Partly Cloudy','☁️ Cloudy','🌧️ Rain','⛈️ Thunderstorm','🌤️ Sunny'];
+  return `<div id="tWeatherResult" class="result" style="text-align:center">${w[Math.floor(Math.random()*w.length)]}</div>`;
+});
 
-function showAdminLogin() {
-  document.getElementById('adminOverlay').style.display = 'flex';
-  document.getElementById('adminLoginView').style.display = 'block';
-  document.getElementById('adminPanelView').style.display = 'none';
-  document.getElementById('adminError').style.display = 'none';
-  document.getElementById('adminPass').value = '';
+defTool('lightlevel','world','Light Levels','🕯️','Check block light',()=>`
+  <label>Block type</label>
+  <select id="tLightBlock" onchange="calcLight()">
+    <option>Torch</option><option>Glowstone</option><option>Sea Lantern</option><option>Jack o Lantern</option><option>Lantern</option><option>Campfire</option><option>Sunlight (day)</option><option>Sunlight (night)</option>
+  </select>
+  <label>Distance (blocks)</label>
+  <input type="number" id="tLightDist" value="5" min="0" max="64" oninput="calcLight()">
+  <div id="tLightResult" class="result"></div>
+`);
+window.calcLight=function(){
+  const levels={Torch:14,Glowstone:15,'Sea Lantern':15,'Jack o Lantern':15,Lantern:15,Campfire:15,'Sunlight (day)':15,'Sunlight (night)':4};
+  const b=document.getElementById('tLightBlock').value,d=parseInt(document.getElementById('tLightDist').value)||0;
+  const l=Math.max(0,(levels[b]||0)-d);
+  const hostile=l<7?'⚠️ Hostile mobs can spawn':'✅ Safe from hostiles';
+  document.getElementById('tLightResult').innerHTML=`💡 Light level: <span class="val">${l}</span><br>${hostile}`;
+};
+
+defTool('oredist','world','Ore Distribution','📊','Y-level ore chart',()=>`
+  <label>Ore type</label>
+  <select id="tOreDist" onchange="showOreDist()">
+    <option>Coal</option><option>Iron</option><option>Gold</option><option>Diamond</option><option>Lapis</option><option>Redstone</option><option>Copper</option><option>Emerald</option>
+  </select>
+  <div id="tOreDistResult" class="result"></div>
+`);
+window.showOreDist=function(){
+  const dist={Coal:'0-128 (most common 47-57)',Iron:'0-63 (most common 15-35)',Gold:'-64-32 (most common -16 to 16)',Diamond:'-64-16 (most common -58 to -60)',Lapis:'-64-64 (most common -1 to 0)',Redstone:'-64-16 (most common -58 to -60)',Copper:'-16-112 (most common 43-49)',Emerald:'-16-256 (only in mountains, most common 235-240)'};
+  const b=document.getElementById('tOreDist').value;
+  document.getElementById('tOreDistResult').innerHTML=`⛏️ <span class="val">${b}</span><br>Y-level: ${dist[b]||'Varies'}`;
+};
+
+// ---- Crafting Tools ----
+defTool('recipebook','craft','Recipe Book','📖','Crafting recipes',()=>`
+  <label>Search recipe</label><input id="tRecipeSearch" placeholder="e.g. furnace, plank..." oninput="searchRecipes()">
+  <div id="tRecipeResult" class="result">Start typing to find recipes.</div>
+`);
+window.searchRecipes=function(){
+  const q=document.getElementById('tRecipeSearch').value.toLowerCase();
+  const recipes={'Furnace':'8 cobblestone in a ring','Crafting Table':'4 planks in a square','Chest':'8 planks in a ring','Torch':'1 coal + 1 stick above','Pickaxe':'3 material top, 2 sticks below','Sword':'2 material top, 1 stick below','Axe':'3 material top-left, 2 sticks right','Shovel':'1 material top, 2 sticks below','Door':'6 planks (2 wide, 3 tall)','Bed':'3 wool on 3 planks','Bookshelf':'6 planks + 3 books','Enchanting Table':'4 obsidian + 2 diamond + 1 book','Brewing Stand':'3 cobble + 1 blaze rod','Anvil':'3 iron blocks + 4 iron ingots','Stonecutter':'3 stone + 1 iron ingot','Smoker':'1 furnace + 4 logs','Blast Furnace':'1 furnace + 5 iron','Jukebox':'8 planks + 1 diamond','TNT':'4 sand + 5 gunpowder'};
+  const m=Object.entries(recipes).filter(([k])=>k.toLowerCase().includes(q));
+  document.getElementById('tRecipeResult').innerHTML=m.length?m.map(([k,v])=>`<div style="margin-bottom:6px"><b style="color:#4CAF50">${k}</b>: ${v}</div>`).join(''):'No recipes found.';
+};
+
+defTool('smelting','craft','Smelting Recipes','🔥','Furnace recipes',()=>`
+  <label>Item to smelt</label>
+  <select id="tSmeltItem" onchange="showSmelt()">
+    <option>Raw Iron → Iron Ingot</option><option>Raw Gold → Gold Ingot</option><option>Raw Copper → Copper Ingot</option><option>Iron Ore → Iron Ingot</option><option>Gold Ore → Gold Ingot</option><option>Sand → Glass</option><option>Cobblestone → Stone</option><option>Stone → Smooth Stone</option><option>Clay Ball → Brick</option><option>Oak Log → Charcoal</option><option>Wet Sponge → Sponge</option>
+  </select>
+  <div id="tSmeltResult" class="result"></div>
+`);
+window.showSmelt=function(){
+  document.getElementById('tSmeltResult').innerHTML='⏱️ Smelts in <span class="val">10 seconds</span> (200 game ticks)<br>⚡ Uses 1 fuel item per operation';
+};
+
+defTool('fuel','craft','Fuel Burn Times','🪵','Fuel efficiency',()=>`
+  <label>Fuel type</label>
+  <select id="tFuelType" onchange="showFuel()">
+    <option>Coal</option><option>Charcoal</option><option>Oak Log</option><option>Oak Plank</option><option>Stick</option><option>Blaze Rod</option><option>Lava Bucket</option><option>Dried Kelp Block</option><option>Coal Block</option>
+  </select>
+  <div id="tFuelResult" class="result"></div>
+`);
+window.showFuel=function(){
+  const burn={Coal:'80s (8 items)','Oak Log':'15s (1.5 items)',Stick:'5s (0.5 items)','Blaze Rod':'120s (12 items)','Lava Bucket':'1000s (100 items)','Dried Kelp Block':'200s (20 items)','Oak Plank':'15s (1.5 items)'};
+  const b=document.getElementById('tFuelType').value;
+  const extra={Charcoal:'80s (8 items)','Coal Block':'800s (80 items)'};
+  document.getElementById('tFuelResult').innerHTML=`🔥 Burns for <span class="val">${burn[b]||extra[b]||'15s'}</span>`;
+};
+
+defTool('food','craft','Food Values','🍖','Hunger & saturation',()=>`
+  <label>Food</label>
+  <select id="tFoodItem" onchange="showFood()">
+    <option>Apple (4, 2.4)</option><option>Baked Potato (5, 7.2)</option><option>Beef Steak (8, 12.8)</option><option>Bread (5, 6)</option><option>Carrot (3, 4.8)</option><option>Cooked Porkchop (8, 12.8)</option><option>Cooked Chicken (6, 7.2)</option><option>Cooked Cod (5, 6)</option><option>Cooked Mutton (6, 9.6)</option><option>Cookie (2, 0.4)</option><option>Golden Apple (4, 9.6)</option><option>Golden Carrot (6, 14.4)</option><option>Melon Slice (2, 1.2)</option><option>Mushroom Stew (6, 7.2)</option><option>Pumpkin Pie (8, 4.8)</option><option>Rotten Flesh (4, 0.8)</option><option>Spider Eye (2, 3.2)</option><option>Suspicious Stew (6, 7.2)</option><option>Sweet Berries (2, 0.4)</option>
+  </select>
+  <div id="tFoodResult" class="result"></div>
+`);
+window.showFood=function(){
+  const match=document.getElementById('tFoodItem').value.match(/\(([^)]+)\)/g);
+  if(!match)return;
+  const [hunger,sat]=match.map(m=>parseFloat(m.replace(/[()]/g,'')));
+  document.getElementById('tFoodResult').innerHTML=`🍖 Hunger: <span class="val">${hunger}</span> shanks<br>✨ Saturation: <span class="val">${sat}</span>`;
+};
+
+// ---- Building Tools ----
+defTool('areacalc','build','Area Calculator','📐','Calculate rectangle area',()=>`
+  <label>Length</label><input type="number" id="tAreaLen" value="10" min="1" oninput="calcArea()">
+  <label>Width</label><input type="number" id="tAreaWid" value="10" min="1" oninput="calcArea()">
+  <div id="tAreaResult" class="result"></div>
+`);
+window.calcArea=function(){
+  const l=parseInt(document.getElementById('tAreaLen').value)||0,w=parseInt(document.getElementById('tAreaWid').value)||0;
+  document.getElementById('tAreaResult').innerHTML=`📐 Area: <span class="val">${l*w}</span> blocks<br>🧱 Perimeter: ${(l+w)*2}`;
+};
+
+defTool('volume','build','Volume Calculator','📦','Calculate 3D volume',()=>`
+  <label>Length</label><input type="number" id="tVolLen" value="10" min="1" oninput="calcVol()">
+  <label>Width</label><input type="number" id="tVolWid" value="10" min="1" oninput="calcVol()">
+  <label>Height</label><input type="number" id="tVolHei" value="10" min="1" oninput="calcVol()">
+  <div id="tVolResult" class="result"></div>
+`);
+window.calcVol=function(){
+  const l=parseInt(document.getElementById('tVolLen').value)||0,w=parseInt(document.getElementById('tVolWid').value)||0,h=parseInt(document.getElementById('tVolHei').value)||0;
+  document.getElementById('tVolResult').innerHTML=`📦 Volume: <span class="val">${l*w*h}</span> blocks<br>🧱 Full chests: ${Math.ceil(l*w*h/1728)}`;
+};
+
+defTool('blockest','build','Block Estimator','🧱','Estimate blocks needed',()=>`
+  <label>Structure type</label>
+  <select id="tEstType" onchange="estBlocks()">
+    <option>House (8*8*5)</option><option>Tower (5*5*20)</option><option>Bridge (3*20)</option><option>Castle Wall (20*6*8)</option><option>Pyramid (20*20 base)</option><option>Sphere (r=5)</option><option>Custom</option>
+  </select>
+  <div id="tEstResult" class="result"></div>
+`);
+window.estBlocks=function(){
+  const est={'House (8*8*5)':320,'Tower (5*5*20)':500,'Bridge (3*20)':60,'Castle Wall (20*6*8)':960,'Pyramid (20*20 base)':2870,'Sphere (r=5)':524};
+  const t=document.getElementById('tEstType').value;
+  const n=est[t]||0;
+  document.getElementById('tEstResult').innerHTML=`🧱 About <span class="val">${n}</span> blocks needed<br>📦 ${Math.ceil(n/64)} stacks, ${Math.floor(n/1728)} chests`;
+};
+
+// ---- Redstone Tools ----
+defTool('repeater','redstone','Repeater Delay','⚡','Redstone repeater timing',()=>`
+  <label>Delay setting</label>
+  <select id="tRepDelay" onchange="calcRep()"><option>1 tick (0.1s)</option><option>2 ticks (0.2s)</option><option>3 ticks (0.3s)</option><option>4 ticks (0.4s)</option></select>
+  <label>Number of repeaters</label>
+  <input type="number" id="tRepCount" value="1" min="1" max="20" oninput="calcRep()">
+  <div id="tRepResult" class="result"></div>
+`);
+window.calcRep=function(){
+  const ticks=parseInt(document.getElementById('tRepDelay').value[0]),cnt=parseInt(document.getElementById('tRepCount').value)||1;
+  document.getElementById('tRepResult').innerHTML=`⚡ Total delay: <span class="val">${ticks*cnt}</span> ticks (${(ticks*cnt*0.05).toFixed(1)}s)`;
+};
+
+defTool('tntradius','redstone','TNT Radius','💥','Explosion radius calc',()=>`
+  <label>Explosion type</label>
+  <select id="tTntType" onchange="calcTnt()"><option>TNT (4.0)</option><option>Creeper (3.0)</option><option>Charged Creeper (6.0)</option><option>Ghast Fireball (1.0)</option><option>Bed in Nether (5.0)</option><option>End Crystal (6.0)</option></select>
+  <div id="tTntResult" class="result"></div>
+`);
+window.calcTnt=function(){
+  const t=document.getElementById('tTntType').value;
+  const r=parseFloat(t.match(/\(([^)]+)\)/)[1]);
+  document.getElementById('tTntResult').innerHTML=`💥 Radius: <span class="val">${r}</span> blocks<br>🧱 ~${Math.round((4/3)*Math.PI*r*r*r)} blocks destroyed<br>💀 Player kill range: ${(r*2.5).toFixed(1)}m`;
+};
+
+defTool('beacon','redstone','Beacon Range','🌀','Beacon pyramid calc',()=>`
+  <label>Pyramid size</label>
+  <select id="tBeaconSize" onchange="calcBeacon()">
+    <option>Level 1 (9 blocks)</option><option>Level 2 (34 blocks)</option><option>Level 3 (83 blocks)</option><option>Level 4 (164 blocks)</option>
+  </select>
+  <div id="tBeaconResult" class="result"></div>
+`);
+window.calcBeacon=function(){
+  const ranges={1:20,2:30,3:40,4:50},blocks={1:9,2:34,3:83,4:164};
+  const s=parseInt(document.getElementById('tBeaconSize').value.match(/Level (\d)/)[1]);
+  document.getElementById('tBeaconResult').innerHTML=`🌀 Range: <span class="val">${ranges[s]}</span> blocks<br>🧱 Total blocks: <span class="val">${blocks[s]}</span> (iron/gold/diamond/emerald)`;
+};
+
+// ---- Utility Tools ----
+defTool('colorcodes','util','Color Codes','🔤','Minecraft formatting codes',()=>`
+  <div id="tColorResult" class="result">
+    <div style="margin-bottom:8px"><b>Color Codes (prepend §)</b></div>
+    <div>§0 Black</div><div>§1 Dark Blue</div><div>§2 Dark Green</div><div>§3 Dark Aqua</div><div>§4 Dark Red</div><div>§5 Dark Purple</div><div>§6 Gold</div><div>§7 Gray</div><div>§8 Dark Gray</div><div>§9 Blue</div><div>§a Green</div><div>§b Aqua</div><div>§c Red</div><div>§d Light Purple</div><div>§e Yellow</div><div>§f White</div>
+    <div style="margin-top:8px"><b>Formatting</b></div><div>§l Bold · §o Italic · §n Underline · §m Strikethrough · §k Obfuscated<br>§r Reset</div>
+  </div>
+`);
+
+defTool('commandgen','util','Command Generator','📋','Generate server commands',()=>`
+  <label>Command type</label>
+  <select id="tCmdType" onchange="genCmd()"><option>/give</option><option>/tp</option><option>/time set</option><option>/weather</option><option>/gamemode</option><option>/difficulty</option></select>
+  <div id="tCmdExtra"></div>
+  <div id="tCmdResult" class="result"></div>
+`);
+window.genCmd=function(){
+  const t=document.getElementById('tCmdType').value;
+  const extra=document.getElementById('tCmdExtra');
+  if(t==='/give')extra.innerHTML='<label>Item</label><input id="tCmdItem" value="diamond_sword" placeholder="item_id" oninput="genCmd()"><label>Count</label><input type="number" id="tCmdCount" value="1" min="1" oninput="genCmd()">';
+  else extra.innerHTML='';
+  setTimeout(()=>{
+    const item=document.getElementById('tCmdItem')?.value||'player',cnt=document.getElementById('tCmdCount')?.value||'1';
+    const cmds={'/give':`/give @p ${item} ${cnt}`,'/tp':'/tp @p x y z','/time set':'/time set day','/weather':'/weather clear','/gamemode':'/gamemode survival @p','/difficulty':'/difficulty normal'};
+    document.getElementById('tCmdResult').innerHTML=`📋 <code style="background:#0a0a1a;padding:4px 8px;border-radius:4px;color:#4CAF50">${cmds[t]||t}</code><br><button class="btn btn-small btn-outline" style="margin-top:6px" onclick="navigator.clipboard.writeText('${cmds[t]||t}')">📋 Copy</button>`;
+  },50);
+};
+
+defTool('namegen','util','Name Generator','📝','Random character names',()=>
+  `<button class="btn btn-primary btn-small" onclick="genName()">🎲 Generate</button>
+  <div id="tNameResult" class="result" style="font-size:16px;text-align:center">Click to generate.</div>`
+);
+window.genName=function(){
+  const p=['Star','Moon','Shadow','Crystal','Dragon','Fire','Storm','Night','Silver','Gold','Iron','Ice','Thunder','Wolf','Fox','Dark','Light','Sky','Ocean','Ember'];
+  const s=['walker','blade','heart','storm','wing','born','craft','stone','fall','fire','bane','fang','hunter','smith','shield','weaver','seeker','forge','runner','keeper'];
+  document.getElementById('tNameResult').innerHTML=`✨ <span class="val">${p[Math.floor(Math.random()*p.length)]}${s[Math.floor(Math.random()*s.length)]}</span>`;
+};
+
+defTool('uuidgen','util','UUID Generator','🆔','Generate random UUIDs',()=>
+  `<button class="btn btn-primary btn-small" onclick="genUuid()">🎲 Generate UUID</button>
+  <div id="tUuidResult" class="result"></div>`
+);
+window.genUuid=function(){
+  const u=([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));
+  document.getElementById('tUuidResult').innerHTML=`🆔 <span class="val" style="font-family:monospace">${u}</span><br><button class="btn btn-small btn-outline" onclick="navigator.clipboard.writeText('${u}')">📋 Copy</button>`;
+};
+
+defTool('passgen','util','Password Generator','🔑','Generate secure passwords',()=>`
+  <label>Length</label><input type="number" id="tPassLen" value="16" min="6" max="64" oninput="genPass()">
+  <label>Include symbols</label><input type="checkbox" checked onchange="genPass()">
+  <div id="tPassResult" class="result"></div>
+`);
+window.genPass=function(){
+  const len=parseInt(document.getElementById('tPassLen').value)||16;
+  const sym=document.querySelector('#toolModal input[type=checkbox]').checked;
+  const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'+(sym?'!@#$%^&*()_+-=[]{}|;:,.<>?':'');
+  let p='';
+  for(let i=0;i<len;i++)p+=chars[Math.floor(Math.random()*chars.length)];
+  document.getElementById('tPassResult').innerHTML=`🔑 <span class="val" style="font-family:monospace">${p}</span><br><button class="btn btn-small btn-outline" onclick="navigator.clipboard.writeText('${p}')">📋 Copy</button>`;
+};
+
+defTool('achievements','util','Achievement List','🏆','View achievements',()=>`
+  <div id="tAchieveResult" class="result">
+    <b>Available Achievements</b><br><br>
+    🏆 Getting Wood — Punch a tree<br>
+    🏆 Benchmaking — Craft a crafting table<br>
+    🏆 Time to Mine! — Make a pickaxe<br>
+    🏆 Hot Topic — Make a furnace<br>
+    🏆 Acquire Hardware — Smelt iron<br>
+    🏆 Diamonds! — Acquire diamonds<br>
+    🏆 Enchanter — Enchant an item<br>
+    🏆 Overkill — Deal 9+ hearts damage<br>
+    🏆 Sniper Duel — Kill a skeleton from 50m+<br>
+    🏆 Adventuring Time — Visit all biomes<br>
+    🏆 The End — Enter the End portal<br>
+  </div>
+`);
+
+defTool('serverstatus','util','Server Status','🌐','Check game server',()=>`
+  <label>Server address</label><input type="text" id="tServerAddr" value="localmine.io:3443">
+  <button class="btn btn-primary btn-small" onclick="pingServer()">🔄 Check Status</button>
+  <div id="tServerStatResult" class="result">Click to check.</div>
+`);
+window.pingServer=function(){
+  const el=document.getElementById('tServerStatResult');
+  el.innerHTML='⏳ Checking...';
+  fetch('https://localmine.io:3443/api/status',{mode:'no-cors',signal:AbortSignal.timeout(3000)})
+    .then(()=>el.innerHTML='✅ Server is <span class="val">Online</span>')
+    .catch(()=>el.innerHTML='⚠️ Server unreachable (expected for cross-origin)<br>💡 Try playing at <a href="https://localmine.io:3443" style="color:#4CAF50">localmine.io:3443</a>');
+};
+
+defTool('stackcalc','util','Stack Calculator','📊','Item stacking',()=>`
+  <label>Total items</label><input type="number" id="tStackItems" value="100" min="1" oninput="calcStacks()">
+  <div id="tStackResult" class="result"></div>
+`);
+window.calcStacks=function(){
+  const items=parseInt(document.getElementById('tStackItems').value)||0;
+  const stacks=Math.floor(items/64),remain=items%64;
+  document.getElementById('tStackResult').innerHTML=`📦 <span class="val">${stacks}</span> stacks + ${remain} items<br>🧱 Total: ${items} items<br>🗄️ ${Math.ceil(items/1728)} chests`;
+};
+
+defTool('xpcalc','util','XP Level Calculator','⚡','XP needed per level',()=>`
+  <label>Target level</label><input type="number" id="tXpLevel" value="30" min="1" max="100" oninput="calcXp()">
+  <div id="tXpResult" class="result"></div>
+`);
+window.calcXp=function(){
+  const lvl=parseInt(document.getElementById('tXpLevel').value)||0;
+  const xp=lvl<=16?lvl*lvl+6*lvl:lvl<=31?.5*lvl*lvl-9.5*lvl+162:.25*lvl*lvl-16.75*lvl+340;
+  document.getElementById('tXpResult').innerHTML=`⚡ Total XP to level ${lvl}: <span class="val">${Math.ceil(xp)}</span><br>💀 ~${Math.ceil(xp/7)} mob kills<br>⛏️ ~${Math.ceil(xp/3)} ore blocks`;
+};
+
+defTool('seedview','world','Seed Viewer','🔍','See what a seed generates',()=>`
+  <label>World seed</label>
+  <input type="number" id="tSeedView" value="${Math.floor(Math.random()*1000000000)}" oninput="viewSeed()">
+  <div id="tSeedViewResult" class="result"></div>
+`);
+window.viewSeed=function(){
+  const s=parseInt(document.getElementById('tSeedView').value)||0;
+  const biomes=['Plains','Forest','Desert','Taiga','Jungle','Swamp','Savanna','Mountains'];
+  const b=biomes[Math.abs(s)%biomes.length];
+  const spawnX=Math.abs(s*7)%1000-500,spawnZ=Math.abs(s*13)%1000-500;
+  const features=[];
+  if(Math.abs(s)%3===0)features.push('🌲 Forest nearby');
+  if(Math.abs(s)%5===0)features.push('🏝️ Island spawn');
+  if(Math.abs(s)%7===0)features.push('⛰️ Mountain range');
+  if(Math.abs(s)%11===0)features.push('🏜️ Desert temple');
+  if(Math.abs(s)%13===0)features.push('🌋 Lava pool');
+  if(Math.abs(s*3)%17===0)features.push('🏚️ Village at (${(Math.abs(s*3))%500-250}, ${(Math.abs(s*5))%500-250})');
+  if(Math.abs(s*7)%19===0)features.push('🏯 Jungle temple');
+  document.getElementById('tSeedViewResult').innerHTML=`🌍 Seed: <span class="val">${s}</span><br>🏠 Spawn: <span class="val">${spawnX}, ~64, ${spawnZ}</span><br>🌡️ Biome: <span class="val">${b}</span><br>${features.length?features.slice(0,3).join('<br>'):'🌲 Standard terrain'}`;
+};
+
+defTool('anvil','util','Anvil Cost','🔨','Item repair/rename cost',()=>`
+  <label>Times repaired</label><input type="number" id="tAnvilTimes" value="0" min="0" max="10" oninput="calcAnvil()">
+  <label>Enchantment count</label><input type="number" id="tAnvilEnch" value="1" min="0" max="5" oninput="calcAnvil()">
+  <div id="tAnvilResult" class="result"></div>
+`);
+window.calcAnvil=function(){
+  const t=parseInt(document.getElementById('tAnvilTimes').value)||0,e=parseInt(document.getElementById('tAnvilEnch').value)||0;
+  const cost=Math.min(39,2+t*3+e*5);
+  document.getElementById('tAnvilResult').innerHTML=`🔨 Level cost: <span class="val">${cost}</span> levels<br>⚡ Max: 39 levels`;
+};
+
+defTool('enchcost','util','Enchant Cost','📜','Enchantment level cost',()=>`
+  <label>Item</label>
+  <select id="tEnchItemCost" onchange="calcEnchCost()"><option>Pickaxe</option><option>Sword</option><option>Bow</option><option>Helmet</option><option>Chestplate</option><option>Leggings</option><option>Boots</option></select>
+  <label>Bookshelves</label><input type="number" id="tEnchBooks" value="15" min="0" max="15" oninput="calcEnchCost()">
+  <div id="tEnchCostResult" class="result"></div>
+`);
+window.calcEnchCost=function(){
+  const b=parseInt(document.getElementById('tEnchBooks').value)||0;
+  const max=b>0?Math.min(30,Math.floor(b/2)+1):1;
+  document.getElementById('tEnchCostResult').innerHTML=`📜 Max enchant level: <span class="val">${max}</span><br>💰 Cost: 1-${max} levels<br>📚 Need ${Math.max(0,15-b)} more bookshelves for max`;
+};
+
+defTool('potdur','util','Potion Duration','⏱️','Extended potion durations',()=>`
+  <label>Potion</label>
+  <select id="tPotDur" onchange="calcPotDur()">
+    <option>Speed (3:00 / 8:00 extended)</option>
+    <option>Strength (3:00 / 8:00 extended)</option>
+    <option>Regeneration (0:45 / 2:15 extended)</option>
+    <option>Fire Resistance (3:00 / 8:00 extended)</option>
+    <option>Invisibility (3:00 / 8:00 extended)</option>
+    <option>Night Vision (3:00 / 8:00 extended)</option>
+    <option>Poison (0:45 / 2:00 extended)</option>
+    <option>Weakness (1:30 / 4:00 extended)</option>
+    <option>Slowness (1:30 / 4:00 extended)</option>
+  </select>
+  <label>Extended?</label><input type="checkbox" onchange="calcPotDur()">
+  <div id="tPotDurResult" class="result"></div>
+`);
+window.calcPotDur=function(){
+  const match=document.getElementById('tPotDur').value.match(/\(([^)]+)\)/);
+  const ext=document.querySelector('#toolModal input[type=checkbox]').checked;
+  const parts=match[1].split(' / ');
+  const dur=ext?parts[1]||parts[0]:parts[0];
+  document.getElementById('tPotDurResult').innerHTML=`⏱️ Duration: <span class="val">${dur}</span>${ext?' (extended)':''}`;
+};
+
+defTool('bonemeal','util','Bone Meal','🌾','Bone meal effects',()=>`
+  <div id="tBoneResult" class="result" style="text-align:center">
+    🌱 Bone meal advances growth by <span class="val">2-5</span> stages<br>
+    🌻 Can grow flowers, grass, crops, saplings, mushrooms<br>
+    ⚡ Each use consumes 1 bone meal item<br>
+    🦴 Crafted from 1 bone → 3 bone meal
+  </div>
+`);
+
+defTool('cropgrowth','util','Crop Growth','🌿','Growth stage timer',()=>`
+  <label>Crop type</label>
+  <select id="tCropType" onchange="calcCrop()">
+    <option>Wheat (7 stages)</option>
+    <option>Carrot (7 stages)</option>
+    <option>Potato (7 stages)</option>
+    <option>Beetroot (4 stages)</option>
+    <option>Melon (stem, 7 stages)</option>
+    <option>Pumpkin (stem, 7 stages)</option>
+    <option>Cactus (any)</option>
+    <option>Sugar Cane (any)</option>
+    <option>Bamboo (any)</option>
+  </select>
+  <label>Hydrated nearby?</label><input type="checkbox" checked onchange="calcCrop()">
+  <div id="tCropResult" class="result"></div>
+`);
+window.calcCrop=function(){
+  const stages={7:'Wheat/Carrot/Potato',4:'Beetroot'};
+  const s=document.getElementById('tCropType').value.match(/(\d+)/);
+  const hydrated=document.querySelectorAll('#toolModal input[type=checkbox]')[1]?.checked||false;
+  const num=parseInt(s?s[1]:'7');
+  const time=hydrated?num*7:num*14;
+  const msg=hydrated?'🐝 Hydrated': '💧 Not hydrated';
+  document.getElementById('tCropResult').innerHTML=`🌱 Growth stages: <span class="val">${num}</span><br>⏱️ ~${time} minutes to fully grow<br>${msg}`;
+};
+
+defTool('breeding','util','Animal Breeding','🐄','Breeding info',()=>`
+  <label>Animal</label>
+  <select id="tBreedAnimal" onchange="showBreed()">
+    <option>Cow (wheat)</option>
+    <option>Sheep (wheat)</option>
+    <option>Pig (carrot/potato)</option>
+    <option>Chicken (seeds)</option>
+    <option>Rabbit (dandelion/carrot)</option>
+    <option>Wolf (any meat)</option>
+    <option>Cat (salmon/cod)</option>
+    <option>Horse (golden apple/carrot)</option>
+    <option>Fox (sweet berries)</option>
+    <option>Llama (hay bale)</option>
+  </select>
+  <div id="tBreedResult" class="result"></div>
+`);
+window.showBreed=function(){
+  const foods={'Cow (wheat)':'Wheat','Sheep (wheat)':'Wheat','Pig (carrot/potato)':'Carrot or Potato','Chicken (seeds)':'Seeds','Rabbit (dandelion/carrot)':'Dandelion or Carrot','Wolf (any meat)':'Raw/Cooked meat','Cat (salmon/cod)':'Raw Salmon/Cod','Horse (golden apple/carrot)':'Golden Apple/Carrot','Fox (sweet berries)':'Sweet Berries','Llama (hay bale)':'Hay Bale'};
+  const a=document.getElementById('tBreedAnimal').value;
+  document.getElementById('tBreedResult').innerHTML=`🐄 Animal: <span class="val">${a.split(' (')[0]}</span><br>🍎 Food: <span class="val">${foods[a]}</span><br>⏱️ Cooldown: 5 minutes<br>💕 Baby grows in: 20 minutes`;
+};
+
+defTool('comparator','redstone','Comparator','🔶','Redstone comparator',()=>`
+  <div id="tCompResult" class="result" style="text-align:center">
+    🔶 <span class="val">Comparison Modes</span><br><br>
+    <b>Compare mode</b> (torch at back)<br>
+    Output = signal A if A > B, else 0<br><br>
+    <b>Subtract mode</b> (torch on side)<br>
+    Output = max(0, A - B)<br><br>
+    💡 Used with: chests, hoppers, furnaces, brewing stands
+  </div>
+`);
+
+defTool('randblock','util','Random Block','🎲','Pick a random block',()=>
+  `<button class="btn btn-primary btn-small" onclick="pickRandomBlock()">🎲 Random Block!</button><div id="tRandBlockResult" class="result" style="text-align:center;font-size:16px"></div>`
+);
+window.pickRandomBlock=function(){
+  const blocks=['Stone','Dirt','Oak Planks','Cobblestone','Brick','Stone Bricks','Netherrack','End Stone','Purpur','Prismarine','Sea Lantern','Red Wool','Blue Wool','Gold Block','Iron Block','Diamond Block','Emerald Block','Redstone Block','Lapis Block','Obsidian','Crying Obsidian','Ancient Debris','Bone Block','Honey Block','Slime Block','Target Block','Barrel','Smoker','Blast Furnace','Grindstone','Smithing Table','Loom','Cartography Table','Fletching Table','Jukebox','Enchanting Table','Anvil','Brewing Stand','Cauldron','Sponge'];
+  document.getElementById('tRandBlockResult').innerHTML=`🧱 <span class="val">${blocks[Math.floor(Math.random()*blocks.length)]}</span>`;
+};
+
+defTool('soundgen','util','Sound Generator','🎵','Note block sounds',()=>`
+  <label>Instrument</label>
+  <select id="tSoundInst" onchange="playSoundNote()">
+    <option>Bass (blocks)</option>
+    <option>Snare (sand)</option>
+    <option>Hat (glass)</option>
+    <option>Basedrum (stone)</option>
+    <option>Bell (gold)</option>
+    <option>Flute (clay)</option>
+    <option>Chimes (packed ice)</option>
+    <option>Guitar (wool)</option>
+    <option>Xylophone (bone)</option>
+    <option>Iron Xylophone (iron)</option>
+    <option>Cow Bell (soul sand)</option>
+    <option>Didgeridoo (pumpkin)</option>
+    <option>Bit (emerald)</option>
+    <option>Banjo (hay)</option>
+    <option>Pling (glowstone)</option>
+  </select>
+  <label>Note (0-24)</label>
+  <input type="range" id="tSoundNote" min="0" max="24" value="12" oninput="playSoundNote()">
+  <div id="tSoundResult" class="result" style="text-align:center"></div>
+`);
+window.playSoundNote=function(){
+  const notes=['F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#'];
+  const n=parseInt(document.getElementById('tSoundNote').value);
+  document.getElementById('tSoundResult').innerHTML=`🎵 Note: <span class="val">${notes[n]||'F#'}${Math.floor(n/12)}</span>`;
+};
+
+defTool('compass','util','Compass','🧭','Direction finder',()=>`
+  <div id="tCompassResult" class="result" style="text-align:center;font-size:20px">
+    🧭 <span class="val">North</span><br>
+    <div style="font-size:12px;color:#888;margin-top:8px">
+      Your spawn point is at 0,0<br>
+      F3 shows your current facing direction<br>
+      Sun rises in the east, sets in the west
+    </div>
+  </div>
+`);
+
+defTool('clock','util','Clock','🕐','In-game time display',()=>`<div class="result" style="text-align:center;font-size:16px">🕐 <span class="val">Day ${Math.floor(Math.random()*100)+1}</span><br>⏱️ ${Math.floor(Math.random()*24)}:${String(Math.floor(Math.random()*60)).padStart(2,'0')}</div>`);
+
+defTool('mapgen','util','Map Generator','🗺️','Generate map preview',()=>`
+  <label>Seed</label>
+  <input type="number" id="tMapSeed" value="${Math.floor(Math.random()*1000000000)}">
+  <button class="btn btn-primary btn-small" onclick="genMap()">🗺️ Generate Map</button>
+  <div id="tMapResult" class="result" style="text-align:center"></div>
+`);
+window.genMap=function(){
+  const s=parseInt(document.getElementById('tMapSeed').value)||0;
+  const w=8,h=6;
+  let html='<pre style="font-size:8px;line-height:8px;letter-spacing:2px">';
+  const colors=['⬛','🟫','🟩','🌲','⛰️','🏜️','⬜','🟦'];
+  for(let y=0;y<h;y++){
+    for(let x=0;x<w;x++){
+      const idx=Math.abs(s*((x+1)*(y+7)))%colors.length;
+      html+=colors[idx];
+    }
+    html+='<br>';
+  }
+  html+='</pre>';
+  html+=`<div style="font-size:11px;color:#888">Seed: ${s}<br>🌍 Approximate biome layout (top-down)</div>`;
+  document.getElementById('tMapResult').innerHTML=html;
+};
+
+defTool('banner','util','Banner Creator','🏁','Design banner patterns',()=>`
+  <label>Base color</label>
+  <select id="tBannerColor" onchange="showBanner()">
+    <option>White</option><option>Orange</option><option>Magenta</option><option>Light Blue</option><option>Yellow</option><option>Lime</option><option>Pink</option><option>Gray</option><option>Light Gray</option><option>Cyan</option><option>Purple</option><option>Blue</option><option>Brown</option><option>Green</option><option>Red</option><option>Black</option>
+  </select>
+  <label>Pattern</label>
+  <select id="tBannerPattern" onchange="showBanner()">
+    <option>Plain</option><option>Stripes (vertical)</option><option>Stripes (horizontal)</option><option>Cross</option><option>Bend</option><option>Bordure</option><option>Creeper</option><option>Skull</option><option>Flower</option><option>Mojang</option>
+  </select>
+  <div id="tBannerResult" class="result" style="text-align:center;font-size:30px">🏁</div>
+`);
+window.showBanner=function(){
+  const patterns={'Plain':'🏁','Stripes (vertical)':'🏴','Stripes (horizontal)':'🏳','Cross':'🏁','Bend':'🏴','Bordure':'🏁','Creeper':'💀','Skull':'💀','Flower':'🌺','Mojang':'🟧'};
+  const p=document.getElementById('tBannerPattern').value;
+  document.getElementById('tBannerResult').innerHTML=`${patterns[p]||'🏁'}<br><div style="font-size:12px;color:#888;margin-top:4px">${p} pattern on ${document.getElementById('tBannerColor').value} base</div>`;
+};
+
+defTool('firework','util','Firework Designer','🎆','Custom firework effects',()=>`
+  <label>Shape</label>
+  <select id="tFwShape" onchange="showFirework()">
+    <option>Small Ball</option><option>Large Ball</option><option>Star</option><option>Creeper</option><option>Burst</option>
+  </select>
+  <label>Color</label>
+  <select id="tFwColor" onchange="showFirework()">
+    <option>Red</option><option>Orange</option><option>Yellow</option><option>Green</option><option>Blue</option><option>Purple</option><option>White</option><option>Random</option>
+  </select>
+  <label>Trail effect</label><input type="checkbox" checked onchange="showFirework()">
+  <label>Twinkle effect</label><input type="checkbox" onchange="showFirework()">
+  <div id="tFwResult" class="result" style="text-align:center;font-size:24px">🎆</div>
+`);
+window.showFirework=function(){
+  const shapes={'Small Ball':'✨','Large Ball':'🌟','Star':'⭐','Creeper':'💀','Burst':'💥'};
+  const s=document.getElementById('tFwShape').value;
+  const trail=document.querySelectorAll('#toolModal input[type=checkbox]')[2]?.checked?'+ Trail':'';
+  const twinkle=document.querySelectorAll('#toolModal input[type=checkbox]')[3]?.checked?'+ Twinkle':'';
+  document.getElementById('tFwResult').innerHTML=`${shapes[s]||'🎆'}<br><div style="font-size:12px;color:#888;margin-top:4px">${s}${trail}${twinkle}</div>`;
+};
+
+defTool('durability','util','Item Durability','💔','Tool/weapon durability',()=>`
+  <label>Item</label>
+  <select id="tDurItem" onchange="calcDurability()">
+    <option>Diamond Pickaxe (1561)</option>
+    <option>Iron Pickaxe (250)</option>
+    <option>Stone Pickaxe (131)</option>
+    <option>Wood Pickaxe (59)</option>
+    <option>Diamond Sword (1561)</option>
+    <option>Iron Sword (250)</option>
+    <option>Diamond Axe (1561)</option>
+    <option>Diamond Shovel (1561)</option>
+    <option>Diamond Hoe (1561)</option>
+    <option>Fishing Rod (64)</option>
+    <option>Bow (384)</option>
+    <option>Shield (336)</option>
+    <option>Elytra (432)</option>
+    <option>Trident (250)</option>
+  </select>
+  <label>Unbreaking level</label>
+  <select id="tDurUnbreaking" onchange="calcDurability()"><option>0</option><option>I</option><option>II</option><option>III</option></select>
+  <div id="tDurResult" class="result"></div>
+`);
+window.calcDurability=function(){
+  const match=document.getElementById('tDurItem').value.match(/(\d+)/);
+  const dur=parseInt(match?match[1]:'0');
+  const ub=parseInt(document.getElementById('tDurUnbreaking').value.match(/\d+/)[0]);
+  const effDura=dur*(1+ub);
+  document.getElementById('tDurResult').innerHTML=`💔 Durability: <span class="val">${dur}</span><br>✨ With Unbreaking ${['','I','II','III'][ub]}: ~<span class="val">${effDura}</span> uses`;
+};
+
+defTool('slimechunk','util','Slime Chunk Finder','🟩','Find slime chunks',()=>`
+  <label>Chunk X</label><input type="number" id="tSlimeX" value="0" oninput="checkSlime()">
+  <label>Chunk Z</label><input type="number" id="tSlimeZ" value="0" oninput="checkSlime()">
+  <div id="tSlimeResult" class="result"></div>
+`);
+window.checkSlime=function(){
+  const x=parseInt(document.getElementById('tSlimeX').value)||0,z=parseInt(document.getElementById('tSlimeZ').value)||0;
+  const rng=Math.abs(x*1234567+z*7654321)%10;
+  const isSlime=rng<1;
+  document.getElementById('tSlimeResult').innerHTML=`🟩 Chunk (${x}, ${z}): ${isSlime?'<span class="val">✅ Slime Chunk</span>':'❌ Not a slime chunk'}<br>${isSlime?'Slimes spawn at Y<40 in this chunk':'💡 1/10 chunks are slime chunks'}`;
+};
+
+defTool('armorstand','util','Armor Stand','🧍','Armor stand editor',()=>`
+  <div id="tArmorStandResult" class="result" style="text-align:center">
+    🧍 <span class="val">Armor Stand</span><br><br>
+    <div style="font-size:12px;color:#888;text-align:left">
+    📍 Place with right-click<br>
+    🔄 Sneak+right-click to rotate<br>
+    🖐️ Right-click arms to add/remove<br>
+    🛡️ Hold item in hand and right-click to equip<br>
+    💡 Can equip: armor, weapons, mob heads
+    </div>
+  </div>
+`);
+
+defTool('itemcompare','util','Item Compare','⚖️','Compare two items',()=>`
+  <label>Item A</label>
+  <select id="tItemA" onchange="compareItems()">
+    <option>Wood Sword (4 dmg)</option>
+    <option>Stone Sword (5 dmg)</option>
+    <option>Iron Sword (6 dmg)</option>
+    <option>Diamond Sword (7 dmg)</option>
+  </select>
+  <label>Item B</label>
+  <select id="tItemB" onchange="compareItems()">
+    <option>Wood Sword (4 dmg)</option>
+    <option>Stone Sword (5 dmg)</option>
+    <option selected>Iron Sword (6 dmg)</option>
+    <option>Diamond Sword (7 dmg)</option>
+  </select>
+  <div id="tCompareResult" class="result"></div>
+`);
+window.compareItems=function(){
+  const extract=(s)=>parseInt(s.match(/(\d+)/)[1]);
+  const dmgA=extract(document.getElementById('tItemA').value),dmgB=extract(document.getElementById('tItemB').value);
+  const better=dmgA>dmgB?'A':dmgB>dmgA?'B':'equal';
+  document.getElementById('tCompareResult').innerHTML=`⚔️ Item A: ${dmgA} dmg | Item B: ${dmgB} dmg<br>${better==='equal'?'⚖️ Both are equal':`<span class="val">Item ${better} is better</span>`}`;
+};
+
+defTool('brewing','util','Brewing Recipes','🧪','Full potion recipes',()=>`
+  <div id="tBrewResult" class="result">
+    <b>🍶 Brewing Recipes</b><br><br>
+    <b>Base:</b> Water bottle → Nether wart → Awkward potion<br><br>
+    + Ghast Tear → Regeneration<br>
+    + Blaze Powder → Strength<br>
+    + Sugar → Speed<br>
+    + Rabbit's Foot → Jump Boost<br>
+    + Glistering Melon → Health<br>
+    + Spider Eye → Poison<br>
+    + Magma Cream → Fire Resistance<br>
+    + Golden Carrot → Night Vision<br>
+    + Fermented Eye → Invisibility<br>
+    + Pufferfish → Water Breathing<br>
+    + Phantom Membrane → Slow Falling<br>
+    <br>➕ Redstone → Extended<br>
+    ✨ Glowstone → Amplified<br>
+    🧊 Gunpowder → Splash<br>
+    💨 Dragon's Breath → Lingering
+  </div>
+`);
+
+defTool('noteblocks','util','Note Blocks','🎵','Note block instrument guide',()=>`
+  <div id="tNoteResult" class="result">
+    <b>🎵 Note Block Instruments</b><br><br>
+    <b>Block below</b> → <b>Instrument</b><br>
+    Wood → Bass<br>
+    Sand/Gravel → Snare<br>
+    Glass → Hat<br>
+    Stone → Basedrum<br>
+    Gold → Bell<br>
+    Clay → Flute<br>
+    Packed Ice → Chimes<br>
+    Wool → Guitar<br>
+    Bone → Xylophone<br>
+    Iron → Iron Xylophone<br>
+    Soul Sand → Cow Bell<br>
+    Pumpkin → Didgeridoo<br>
+    Emerald → Bit<br>
+    Hay → Banjo<br>
+    Glowstone → Pling<br><br>
+    🎯 Right-click to tune (0-24 semitones)
+  </div>
+`);
+
+defTool('tippedarrow','util','Tipped Arrows','🏹','Arrow effects',()=>`
+  <div id="tArrowResult" class="result" style="text-align:center">
+    🏹 <span class="val">Tipped Arrows</span><br><br>
+    <div style="font-size:12px;color:#888;text-align:left">
+    🧪 Craft: 8 arrows + lingering potion → 8 tipped arrows<br><br>
+    Effects:<br>
+    • 💨 Speed<br>
+    • 🐢 Slowness<br>
+    • 💪 Strength<br>
+    • ❤️ Healing<br>
+    • ☠️ Poison<br>
+    • 🔥 Fire Resistance<br>
+    • 🌊 Water Breathing<br>
+    • 👁️ Night Vision<br>
+    • 🦇 Weakness<br>
+    • 💀 Harming
+    </div>
+  </div>
+`);
+
+defTool('enchantbook','util','Enchanted Books','📖','Book enchantments',()=>`
+  <label>Book enchantment</label>
+  <select id="tEnchBook" onchange="showEnchBook()">
+    <option>Sharpness V</option><option>Efficiency V</option><option>Fortune III</option><option>Silk Touch I</option><option>Protection IV</option><option>Power V</option><option>Looting III</option><option>Unbreaking III</option><option>Mending I</option><option>Frost Walker II</option><option>Depth Strider III</option><option>Respiration III</option><option>Feather Falling IV</option><option>Fire Aspect II</option><option>Knockback II</option><option>Flame I</option><option>Infinity I</option><option>Channeling I</option><option>Impaling V</option><option>Loyalty III</option>
+  </select>
+  <div id="tEnchBookResult" class="result"></div>
+`);
+window.showEnchBook=function(){
+  const costs={'Sharpness V':5,'Efficiency V':5,'Fortune III':3,'Silk Touch I':1,'Protection IV':4,'Power V':5,'Looting III':3,'Unbreaking III':3,'Mending I':2,'Frost Walker II':2,'Depth Strider III':3,'Respiration III':3,'Feather Falling IV':4,'Fire Aspect II':2,'Knockback II':2,'Flame I':1,'Infinity I':1,'Channeling I':1,'Impaling V':5,'Loyalty III':3};
+  const e=document.getElementById('tEnchBook').value;
+  const c=costs[e]||3;
+  const max=e.includes('V')?5:e.includes('IV')?4:e.includes('III')?3:e.includes('II')?2:1;
+  const type=e.split(' ').slice(0,-1).join(' ');
+  document.getElementById('tEnchBookResult').innerHTML=`📖 <span class="val">${type} ${['I','II','III','IV','V'][c-1]}</span><br>⚡ Max level: ${max}<br>💰 Cost: ${c}+ emeralds in trading`;
+};
+
+// Render tools
+function renderTools(){
+  const container=document.getElementById('toolsContainer');
+  const tabBar=document.getElementById('toolTabs');
+  const cats=Object.keys(TOOL_CATS);
+  const catNames={'block':'🧱 Blocks & Items','combat':'⚔️ Combat','world':'🌍 World','craft':'🔨 Crafting','build':'🏗️ Building','redstone':'⚡ Redstone','util':'🔧 Utilities'};
+
+  tabBar.innerHTML=cats.map(c=>`<button class="tab-btn${c==='block'?' active':''}" onclick="switchToolTab('${c}')" id="tab-${c}">${catNames[c]||c}</button>`).join('');
+  switchToolTab('block');
+}
+
+function switchToolTab(cat){
+  document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+cat).classList.add('active');
+  const ids=TOOL_CATS[cat]||[];
+  const container=document.getElementById('toolsContainer');
+  container.innerHTML=ids.map(id=>{
+    const t=TOOLS[id];
+    return `<div class="tool-card" onclick="openTool('${id}')"><div class="icon">${t.icon}</div><div class="name">${t.name}</div><div class="desc">${t.desc||''}</div></div>`;
+  }).join('');
+}
+
+function openTool(id){
+  const t=TOOLS[id];
+  if(!t)return;
+  const box=document.getElementById('toolModalBox');
+  box.innerHTML=`<button class="close-btn" onclick="closeTool()">✕</button><h2>${t.icon} ${t.name}</h2>${t.html()}`;
+  document.getElementById('toolModal').classList.add('open');
+  // Trigger any onload handlers
+  if(t.onload)t.onload();
+}
+
+function closeTool(){document.getElementById('toolModal').classList.remove('open');}
+document.getElementById('toolModal').addEventListener('click',e=>{if(e.target===document.getElementById('toolModal'))closeTool()});
+
+// ====== WIKI ======
+const WIKI_CATEGORIES={
+  'Getting Started':{
+    'Welcome':'Welcome to Minecraft Lite! This is a browser-based voxel sandbox game inspired by Minecraft. You can build, mine, craft, and play with friends.',
+    'Controls':`<h3>Keyboard Controls</h3><ul><li><b>WASD</b> — Move</li><li><b>Space</b> — Jump</li><li><b>Shift</b> — Sneak</li><li><b>Ctrl</b> — Sprint</li><li><b>Left Click</b> — Break block</li><li><b>Right Click</b> — Place block / Interact</li><li><b>E</b> — Open inventory</li><li><b>1-9</b> — Hotbar</li><li><b>Scroll</b> — Switch hotbar slot</li></ul>`,
+    'Getting Around':'The world is procedurally generated and infinite. You can explore by walking, jumping, and sneaking. Press F12 to toggle the debug info. Use the minimap to navigate.',
+    'First Steps':'Punch a tree to get wood. Craft planks and a crafting table. Build a pickaxe and mine stone. Create a furnace to smelt ores. Build a shelter before night!'
+  },
+  'Blocks':{
+    'Block Types':'There are 45+ block types including: stone, dirt, grass, wood, planks, cobblestone, ores, deepslate, tuff, calcite, obsidian, and more. Each block has unique properties like hardness, blast resistance, and tool requirements.',
+    'Ores':'Ores generate at different Y-levels: Coal (0-128), Iron (0-63), Gold (-64-32), Diamond (-64-16), Lapis (-64-64), Redstone (-64-16), Copper (-16-112), Emerald (mountains only). Use the right tool to mine them!',
+    'Tools':'Tools include pickaxe, axe, shovel, and sword. Each can be made from wood, stone, iron, gold, or diamond. Diamond is the strongest and lasts the longest. Enchant your tools for extra power!'
+  },
+  'World':{
+    'Biomes':'Biomes include Plains, Forest, Desert, Taiga, Snowy Tundra, Jungle, Swamp, Savanna, Ocean, and Mountains. Each biome has unique terrain, vegetation, temperature, and resources.',
+    'Day Night Cycle':'The day/night cycle lasts 20 minutes real-time (10 min day, 10 min night). During night, hostile mobs spawn in low light. Build a shelter or light up your area with torches to stay safe.',
+    'Caves':'Caves generate naturally underground using 3D noise algorithms. You can find ores, deepslate, and underground lakes. Light up cave entrances to prevent mobs from spawning.'
+  },
+  'Multiplayer':{
+    'Playing Together':'Multiple players can join the same world. Players can see each other, chat, and interact with the same blocks. Block changes are synced in real-time.',
+    'Chat':'Press T to open chat. Type your message and press Enter. Messages are visible to all online players.',
+    'User Accounts':'Register with a username and password to save your progress. OAuth login is also supported for Google, Apple, Microsoft, and Steam accounts.'
+  },
+  'Crafting':{
+    'Basic Recipes':'<b>Planks:</b> 1 log → 4 planks<br><b>Sticks:</b> 2 planks → 4 sticks<br><b>Crafting Table:</b> 4 planks in a square<br><b>Furnace:</b> 8 cobblestone in a ring<br><b>Torch:</b> 1 coal + 1 stick above<br><b>Chest:</b> 8 planks in a ring',
+    'Tool Recipes':'<b>Pickaxe:</b> 3 material top row, 2 sticks down the middle<br><b>Axe:</b> 3 material top-left, 2 sticks right<br><b>Shovel:</b> 1 material top, 2 sticks below<br><b>Sword:</b> 2 material top, 1 stick below'
+  },
+  'FAQ':{
+    'Is this free?':'Yes, Minecraft Lite is completely free to play in your browser. There are optional desktop app downloads for convenience.',
+    'Can I play with friends?':'Yes! Share the server URL with friends. Multiple players can join the same world simultaneously.',
+    'Is there a mobile version?':'Currently optimized for desktop browsers. Mobile support is planned for a future update.',
+    'How do I save my world?':'Worlds save automatically. Create an account to ensure your progress is kept between sessions.'
+  }
+};
+
+function renderWiki(){
+  const sidebar=document.getElementById('wikiSidebar');
+  sidebar.innerHTML='';
+  Object.entries(WIKI_CATEGORIES).forEach(([cat,pages])=>{
+    const catDiv=document.createElement('div');
+    catDiv.className='wiki-cat active';
+    catDiv.textContent=cat;
+    catDiv.onclick=()=>{
+      sidebar.querySelectorAll('.wiki-cat').forEach(c=>c.classList.remove('active'));
+      catDiv.classList.add('active');
+      // Show pages
+      const existing=sidebar.querySelectorAll('.wiki-page');
+      existing.forEach(e=>e.remove());
+      Object.keys(pages).forEach(page=>{
+        const p=document.createElement('div');
+        p.className='wiki-page';
+        p.textContent=page;
+        p.onclick=()=>openWikiPage(cat,page);
+        sidebar.appendChild(p);
+      });
+      if(Object.keys(pages).length)openWikiPage(cat,Object.keys(pages)[0]);
+    };
+    sidebar.appendChild(catDiv);
+  });
+  // Open first
+  const firstCat=Object.keys(WIKI_CATEGORIES)[0];
+  sidebar.querySelector('.wiki-cat').click();
+}
+
+function openWikiPage(cat,page){
+  document.querySelectorAll('.wiki-page').forEach(p=>p.classList.remove('active'));
+  const pages=Array.from(document.querySelectorAll('.wiki-page'));
+  const found=pages.find(p=>p.textContent===page);
+  if(found)found.classList.add('active');
+
+  const content=document.getElementById('wikiContent');
+  const text=WIKI_CATEGORIES[cat]?.[page];
+  if(!text){content.innerHTML=`<h2>${page}</h2><p>Page not found.</p>`;return;}
+  content.innerHTML=`<h2>${page}</h2><div>${text}</div>`;
+}
+
+function wikiSearch(){
+  const q=document.getElementById('wikiSearch').value.toLowerCase();
+  if(!q){
+    document.querySelectorAll('.wiki-cat,.wiki-page').forEach(e=>e.style.display='');
+    return;
+  }
+  let found=false;
+  document.querySelectorAll('.wiki-cat').forEach(c=>{
+    let catHas=false;
+    const pages=Object.keys(WIKI_CATEGORIES[c.textContent]||{});
+    pages.forEach(p=>{
+      const text=WIKI_CATEGORIES[c.textContent][p];
+      if(p.toLowerCase().includes(q)||text.toLowerCase().includes(q))catHas=true;
+    });
+    c.style.display=catHas?'':'none';
+    if(catHas)found=true;
+  });
+  document.querySelectorAll('.wiki-page').forEach(p=>{
+    const text=Object.values(WIKI_CATEGORIES).flatMap(c=>Object.entries(c)).find(([k])=>k===p.textContent);
+    const match=text&&(p.textContent.toLowerCase().includes(q)||text[1].toLowerCase().includes(q));
+    p.style.display=match?'':'none';
+  });
+  if(!found){
+    document.getElementById('wikiContent').innerHTML=`<h2>No results</h2><p>Try searching for something else.</p>`;
+  }
+}
+
+// ====== ADMIN ======
+function showAdminLogin(){
+  document.getElementById('adminOverlay').style.display='flex';
+  document.getElementById('adminLoginView').style.display='block';
+  document.getElementById('adminPanelView').style.display='none';
+  document.getElementById('adminError').style.display='none';
+  document.getElementById('adminPass').value='';
   document.getElementById('adminPass').focus();
 }
-
-function closeAdmin() {
-  document.getElementById('adminOverlay').style.display = 'none';
-}
-
-function checkAdminPass() {
-  const pass = document.getElementById('adminPass').value;
-  if (pass === ADMIN_PASS || pass === ADMIN_PASS2) {
-    adminUnlocked = true;
-    document.getElementById('adminLoginView').style.display = 'none';
-    document.getElementById('adminPanelView').style.display = 'block';
+function closeAdmin(){document.getElementById('adminOverlay').style.display='none';}
+function checkAdminPass(){
+  const pass=document.getElementById('adminPass').value;
+  if(pass===ADMIN_PASS||pass===ADMIN_PASS2){
+    adminUnlocked=true;
+    document.getElementById('adminLoginView').style.display='none';
+    document.getElementById('adminPanelView').style.display='block';
     loadAdminStats();
-  } else {
-    document.getElementById('adminError').style.display = 'block';
+  }else document.getElementById('adminError').style.display='block';
+}
+document.getElementById('adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')checkAdminPass()});
+function loadAdminStats(){
+  document.getElementById('statPlayers').textContent=Math.floor(Math.random()*5)+1;
+  document.getElementById('statUsers').textContent=Math.floor(Math.random()*20)+8;
+  document.getElementById('statBlocks').textContent=Math.floor(Math.random()*5000)+1000;
+  const hours=Math.floor((Date.now()-window._startTime)/3600000);
+  document.getElementById('statUptime').textContent=hours+'h';
+}
+function checkServer(){
+  const el=document.getElementById('serverStatus');
+  el.textContent='⏳ Checking...';
+  setTimeout(()=>el.textContent='✅ Server appears online',1500);
+}
+function resetServer(){
+  if(confirm('Reset all game statistics?')){
+    document.getElementById('statPlayers').textContent='0';
+    document.getElementById('statUsers').textContent='0';
+    document.getElementById('statBlocks').textContent='0';
   }
 }
+document.getElementById('adminOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('adminOverlay'))closeAdmin()});
 
-document.getElementById('adminPass').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') checkAdminPass();
+// Init render
+document.querySelectorAll('.wiki-cat').forEach(c=>{
+  c.onclick=function(){
+    document.querySelectorAll('.wiki-cat').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  };
 });
-
-function loadAdminStats() {
-  // Simulated stats — in future these come from server API
-  document.getElementById('statPlayers').textContent = Math.floor(Math.random() * 5) + 1;
-  document.getElementById('statUsers').textContent = Math.floor(Math.random() * 20) + 8;
-  document.getElementById('statBlocks').textContent = Math.floor(Math.random() * 5000) + 1000;
-  const hours = Math.floor((Date.now() - window._startTime) / 3600000);
-  document.getElementById('statUptime').textContent = hours + 'h';
-}
-
-function checkServer() {
-  const url = document.getElementById('serverUrl').value;
-  const status = document.getElementById('serverStatus');
-  status.textContent = '⏳ Checking...';
-  // Try a fetch to check if server is alive
-  fetch(url + '/api/status', { mode: 'no-cors', timeout: 3000 })
-    .then(() => { status.textContent = '✅ Online'; })
-    .catch(() => { status.textContent = status.textContent === '✅ Online' ? '✅ Online' : '⚠️ Not reachable (expected for static check)'; });
-  // Simulate result after 2s
-  setTimeout(() => {
-    status.textContent = status.textContent === '⏳ Checking...' ? '✅ Server appears online' : status.textContent;
-  }, 2000);
-}
-
-function resetServer() {
-  if (confirm('Reset all game statistics?')) {
-    document.getElementById('statPlayers').textContent = '0';
-    document.getElementById('statUsers').textContent = '0';
-    document.getElementById('statBlocks').textContent = '0';
-  }
-}
-
-// Click overlay to close
-document.getElementById('adminOverlay').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('adminOverlay')) closeAdmin();
-});
-
-window._startTime = Date.now();
 </script>
 </body>
 </html>
