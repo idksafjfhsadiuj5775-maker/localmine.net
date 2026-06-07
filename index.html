@@ -45,18 +45,6 @@ nav .right { margin-left: auto; display: flex; gap: 16px; align-items: center; }
 .download-card .detail { color: #888; font-size: 13px; margin-bottom: 16px; }
 .download-card .btn { width: 100%; }
 
-/* Skin Creator */
-.skin-creator { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-.skin-canvas-wrap { background: var(--card); border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
-.skin-canvas-wrap canvas { display: block; image-rendering: pixelated; }
-.skin-controls { display: flex; flex-direction: column; gap: 12px; min-width: 200px; }
-.skin-controls label { font-size: 12px; color: #888; }
-.color-picker-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
-.color-swatch { width: 28px; height: 28px; border-radius: 4px; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; }
-.color-swatch:hover { transform: scale(1.15); }
-.color-swatch.active { border-color: #fff; }
-.skin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-
 /* Updates */
 .update-list { display: flex; flex-direction: column; gap: 12px; }
 .update-item { background: var(--card); border-radius: 8px; padding: 16px 20px; border-left: 3px solid var(--primary); }
@@ -83,7 +71,7 @@ footer a { color: var(--primary); text-decoration: none; }
   <a href="#" class="logo">⛏ LocalMine.net</a>
   <a href="#features">Features</a>
   <a href="#download">Download</a>
-  <a href="#skin-creator">Skin Creator</a>
+  <a href="#skins">Skins</a>
   <a href="#updates">Updates</a>
   <div class="right">
     <a href="https://localmine.io:3443">Play Online</a>
@@ -97,7 +85,7 @@ footer a { color: var(--primary); text-decoration: none; }
   <div class="hero-buttons">
     <a href="https://localmine.io:3443" class="btn btn-primary">▶ Play Online</a>
     <a href="#download" class="btn btn-accent">⬇ Download App</a>
-    <a href="#skin-creator" class="btn btn-outline">🎨 Skin Creator</a>
+    <a href="https://www.minecraftskins.com/skin-editor/" target="_blank" class="btn btn-outline">🎨 Skin Creator</a>
   </div>
 </section>
 
@@ -149,36 +137,16 @@ footer a { color: var(--primary); text-decoration: none; }
   </div>
 </section>
 
-<section id="skin-creator" class="section">
-  <h2>🎨 <span>Skin Creator</span></h2>
-  <p style="text-align:center;color:#888;margin-bottom:24px;">Design your Minecraft Lite character skin. Click pixels to color them.</p>
-  <div class="skin-creator">
-    <div class="skin-canvas-wrap">
-      <canvas id="skinCanvas" width="128" height="256"></canvas>
-    </div>
-    <div class="skin-controls">
-      <div>
-        <label>Colors</label>
-        <div class="color-picker-grid" id="colorPalette"></div>
-      </div>
-      <div>
-        <label>Tools</label>
-        <div style="display:flex;gap:8px;">
-          <button class="btn btn-primary" onclick="setSkinTool('pencil')" id="tool-pencil">✏️ Pencil</button>
-          <button class="btn btn-outline" onclick="setSkinTool('fill')" id="tool-fill">🪣 Fill</button>
-          <button class="btn btn-outline" onclick="setSkinTool('eyedropper')" id="tool-eyd">💉 Pick</button>
-        </div>
-      </div>
-      <div class="skin-actions">
-        <button class="btn btn-accent" onclick="clearSkin()">🗑️ Clear</button>
-        <button class="btn btn-primary" onclick="exportSkin()">💾 Save Skin</button>
-        <button class="btn btn-outline" onclick="loadDefaultSkin()">↩️ Default</button>
-      </div>
-      <div>
-        <label>Preview</label>
-        <canvas id="skinPreview" width="64" height="128" style="border-radius:8px;image-rendering:pixelated;margin-top:4px;"></canvas>
-      </div>
-    </div>
+<section id="skins" class="section" style="background:linear-gradient(135deg,#0f0f2a,#1a1a3e);border-radius:12px;">
+  <h2>🎨 <span>Create Skins</span></h2>
+  <p style="text-align:center;color:#888;margin-bottom:24px;">Design your Minecraft character skin and use it in the game.</p>
+  <div style="text-align:center;">
+    <a href="https://www.minecraftskins.com/skin-editor/" target="_blank" rel="noopener" class="btn btn-accent" style="font-size:18px;padding:16px 40px;">
+      🎨 Open Skin Editor
+    </a>
+    <p style="margin-top:12px;color:#666;font-size:13px;">
+      Use the official Minecraft Skins editor to create custom skins, then save them to use in Minecraft Lite.
+    </p>
   </div>
 </section>
 
@@ -258,231 +226,8 @@ footer a { color: var(--primary); text-decoration: none; }
 </div>
 
 <script>
-// ====== SKIN CREATOR ======
-const canvas = document.getElementById('skinCanvas');
-const ctx = canvas.getContext('2d');
-ctx.imageSmoothingEnabled = false;
-
-const preview = document.getElementById('skinPreview');
-const pctx = preview.getContext('2d');
-pctx.imageSmoothingEnabled = false;
-
-const COLORS = [
-  '#FFFFFF','#D4D4D4','#AAAAAA','#808080','#555555','#2B2B2B','#000000',
-  '#CB8C8C','#B86C6C','#A04C4C','#8C3C3C',
-  '#E4B872','#D4A04C','#C08828','#A07028',
-  '#6CB86C','#4CA04C','#3C8C3C','#287028',
-  '#6CB8B8','#4CA0A0','#3C8C8C','#287070',
-  '#8C8CB8','#6C6CB8','#4C4CA0','#3C3C8C',
-  '#B86CB8','#A04CA0','#8C3C8C','#702870',
-  '#E4E4A0','#D4D470','#C8C850','#B8B830',
-  '#F0D090','#E0B870','#D0A050','#C09040',
-  '#E0A080','#D08060','#C06040','#B05030',
-];
-
-let skinData = new Uint8Array(64 * 64);
-let selectedColor = COLORS[0];
-let currentTool = 'pencil';
-let mouseDown = false;
-
-function initSkin() {
-  const palette = document.getElementById('colorPalette');
-  COLORS.forEach((c, i) => {
-    const swatch = document.createElement('div');
-    swatch.className = 'color-swatch' + (i === 0 ? ' active' : '');
-    swatch.style.background = c;
-    swatch.onclick = () => {
-      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
-      swatch.classList.add('active');
-      selectedColor = c;
-    };
-    palette.appendChild(swatch);
-  });
-  loadDefaultSkin();
-}
-
-function setSkinTool(tool) {
-  currentTool = tool;
-  document.querySelectorAll('#skin-creator .btn').forEach(b => b.className = b.className.replace('btn-primary', 'btn-outline'));
-  document.getElementById('tool-' + tool).className = 'btn btn-primary';
-}
-
-function drawSkin() {
-  const scale = 2;
-  ctx.clearRect(0, 0, 128, 256);
-  for (let y = 0; y < 64; y++) {
-    for (let x = 0; x < 64; x++) {
-      const idx = y * 64 + x;
-      const val = skinData[idx];
-      const color = COLORS[val] || '#000';
-      ctx.fillStyle = color;
-      ctx.fillRect(x * scale, y * scale, scale, scale);
-    }
-  }
-  updatePreview();
-}
-
-function updatePreview() {
-  pctx.clearRect(0, 0, 64, 128);
-  // Head
-  for (let y = 0; y < 8; y++) {
-    for (let x = 8; x < 24; x++) {
-      const idx = y * 64 + x;
-      const val = skinData[idx];
-      pctx.fillStyle = COLORS[val] || '#000';
-      pctx.fillRect(x - 8, y, 1, 1);
-    }
-  }
-  // Body
-  for (let y = 20; y < 32; y++) {
-    for (let x = 12; x < 20; x++) {
-      const idx = y * 64 + x;
-      const val = skinData[idx];
-      pctx.fillStyle = COLORS[val] || '#000';
-      pctx.fillRect(x, y - 4, 1, 1);
-    }
-  }
-  // Arms
-  for (let y = 20; y < 32; y++) {
-    for (let x = 8; x < 12; x++) {
-      const idx = y * 64 + x;
-      const val = skinData[idx];
-      pctx.fillStyle = COLORS[val] || '#000';
-      pctx.fillRect(x - 4, y - 4, 1, 1);
-    }
-    for (let x = 20; x < 24; x++) {
-      const idx = y * 64 + x;
-      const val = skinData[idx];
-      pctx.fillStyle = COLORS[val] || '#000';
-      pctx.fillRect(x + 4, y - 4, 1, 1);
-    }
-  }
-  // Legs
-  for (let y = 32; y < 44; y++) {
-    for (let x = 14; x < 18; x++) {
-      const idx = y * 64 + x;
-      const val = skinData[idx];
-      pctx.fillStyle = COLORS[val] || '#000';
-      pctx.fillRect(x - 2, y + 8, 1, 1);
-    }
-    for (let x = 18; x < 22; x++) {
-      const idx = y * 64 + x;
-      const val = skinData[idx];
-      pctx.fillStyle = COLORS[val] || '#000';
-      pctx.fillRect(x + 2, y + 8, 1, 1);
-    }
-  }
-}
-
-function getPixelPos(e) {
-  const rect = canvas.getBoundingClientRect();
-  const x = Math.floor((e.clientX - rect.left) / 2);
-  const y = Math.floor((e.clientY - rect.top) / 2);
-  if (x < 0 || x >= 64 || y < 0 || y >= 64) return null;
-  return { x, y };
-}
-
-function paintPixel(pos) {
-  if (!pos) return;
-  const idx = pos.y * 64 + pos.x;
-  const colorIdx = COLORS.indexOf(selectedColor);
-  if (colorIdx < 0) return;
-
-  if (currentTool === 'pencil') {
-    skinData[idx] = colorIdx;
-  } else if (currentTool === 'fill') {
-    const target = skinData[idx];
-    if (target === colorIdx) return;
-    const stack = [idx];
-    const visited = new Set();
-    while (stack.length) {
-      const i = stack.pop();
-      if (visited.has(i)) continue;
-      visited.add(i);
-      const ix = i % 64, iy = Math.floor(i / 64);
-      if (skinData[i] !== target) continue;
-      skinData[i] = colorIdx;
-      if (ix > 0) stack.push(i - 1);
-      if (ix < 63) stack.push(i + 1);
-      if (iy > 0) stack.push(i - 64);
-      if (iy < 63) stack.push(i + 64);
-    }
-  } else if (currentTool === 'eyedropper') {
-    selectedColor = COLORS[skinData[idx]] || COLORS[0];
-    document.querySelectorAll('.color-swatch').forEach(s => {
-      s.classList.toggle('active', s.style.background === selectedColor);
-    });
-  }
-  drawSkin();
-}
-
-canvas.addEventListener('mousedown', (e) => {
-  mouseDown = true;
-  paintPixel(getPixelPos(e));
-});
-canvas.addEventListener('mousemove', (e) => {
-  if (mouseDown && currentTool === 'pencil') paintPixel(getPixelPos(e));
-});
-canvas.addEventListener('mouseup', () => { mouseDown = false; });
-canvas.addEventListener('mouseleave', () => { mouseDown = false; });
-
-function clearSkin() {
-  skinData.fill(0);
-  drawSkin();
-}
-
-function loadDefaultSkin() {
-  // Simple default skin (humanoid)
-  skinData.fill(0);
-  // Head
-  for (let y = 0; y < 8; y++)
-    for (let x = 8; x < 24; x++)
-      skinData[y * 64 + x] = COLORS.indexOf('#E4B872');
-  // Hair
-  for (let y = 0; y < 3; y++)
-    for (let x = 8; x < 24; x++)
-      skinData[y * 64 + x] = COLORS.indexOf('#555555');
-  // Eyes
-  skinData[3 * 64 + 12] = COLORS.indexOf('#000000');
-  skinData[3 * 64 + 19] = COLORS.indexOf('#000000');
-  // Body
-  for (let y = 20; y < 32; y++)
-    for (let x = 12; x < 20; x++)
-      skinData[y * 64 + x] = COLORS.indexOf('#4CA04C');
-  // Arms
-  for (let y = 20; y < 32; y++) {
-    for (let x = 8; x < 12; x++) skinData[y * 64 + x] = COLORS.indexOf('#4CA04C');
-    for (let x = 20; x < 24; x++) skinData[y * 64 + x] = COLORS.indexOf('#4CA04C');
-  }
-  // Legs
-  for (let y = 32; y < 44; y++) {
-    for (let x = 12; x < 18; x++) skinData[y * 64 + x] = COLORS.indexOf('#3C3C8C');
-    for (let x = 18; x < 24; x++) skinData[y * 64 + x] = COLORS.indexOf('#3C3C8C');
-  }
-  // Shoes
-  for (let y = 40; y < 44; y++) {
-    for (let x = 12; x < 18; x++) skinData[y * 64 + x] = COLORS.indexOf('#555555');
-    for (let x = 18; x < 24; x++) skinData[y * 64 + x] = COLORS.indexOf('#555555');
-  }
-  drawSkin();
-}
-
-function exportSkin() {
-  const exportCanvas = document.createElement('canvas');
-  exportCanvas.width = 64;
-  exportCanvas.height = 64;
-  const ectx = exportCanvas.getContext('2d');
-  for (let y = 0; y < 64; y++) {
-    for (let x = 0; x < 64; x++) {
-      ectx.fillStyle = COLORS[skinData[y * 64 + x]] || '#000';
-      ectx.fillRect(x, y, 1, 1);
-    }
-  }
-  const link = document.createElement('a');
-  link.download = 'minecraft-lite-skin.png';
-  link.href = exportCanvas.toDataURL();
-  link.click();
-}
+// ====== SKIN CREATOR (external) ======
+function initSkin() { /* no-op — using external editor */ }
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -564,8 +309,6 @@ document.getElementById('adminOverlay').addEventListener('click', (e) => {
 });
 
 window._startTime = Date.now();
-
-initSkin();
 </script>
 </body>
 </html>
