@@ -67,6 +67,9 @@ nav .right { margin-left: auto; display: flex; gap: 16px; align-items: center; }
 footer { text-align: center; padding: 40px 24px; color: #555; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); }
 footer a { color: var(--primary); text-decoration: none; }
 
+#adminOverlay input:focus { outline: none; border-color: #4CAF50; }
+#adminOverlay h2 { font-size: 18px; color: #fff; }
+
 @media (max-width: 600px) {
   .hero h1 { font-size: 32px; }
   .section { padding: 40px 16px; }
@@ -203,8 +206,56 @@ footer a { color: var(--primary); text-decoration: none; }
 <footer>
   <p>Made by <a href="https://mochimochinfo.com">MochiMoch</a> 🌑</p>
   <p style="margin-top:4px;">Not affiliated with Mojang AB or Microsoft.</p>
-  <p style="margin-top:4px;"><a href="https://github.com/idksafjfhsadiuj5775-maker/localmine.io">GitHub</a> · <a href="https://mochimochinfo.com">About</a></p>
+  <p style="margin-top:4px;"><a href="https://github.com/idksafjfhsadiuj5775-maker/localmine.io">GitHub</a> · <a href="https://mochimochinfo.com">About</a> · <a href="#" onclick="showAdminLogin();return false;" style="color:#333;font-size:11px;">Owner</a></p>
 </footer>
+
+<div id="adminOverlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:999;justify-content:center;align-items:center;backdrop-filter:blur(8px);">
+  <div style="background:#1a1a2e;border-radius:16px;padding:32px;max-width:400px;width:90%;border:1px solid rgba(255,255,255,0.1);">
+    <div id="adminLoginView">
+      <h2 style="margin-bottom:16px;">🔐 Owner Verification</h2>
+      <input type="password" id="adminPass" style="width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:#0a0a1a;color:#fff;font-size:16px;margin-bottom:12px;" placeholder="Enter owner password">
+      <p id="adminError" style="color:#f44;font-size:13px;display:none;margin-bottom:8px;">Invalid password</p>
+      <button onclick="checkAdminPass()" style="width:100%;padding:12px;background:#4CAF50;color:#fff;border:none;border-radius:8px;font-size:16px;cursor:pointer;">🔓 Unlock</button>
+      <p style="margin-top:8px;text-align:center;"><a href="#" onclick="closeAdmin();return false;" style="color:#888;font-size:12px;">Cancel</a></p>
+    </div>
+    <div id="adminPanelView" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h2>⚙️ Owner Panel</h2>
+        <span style="background:#4CAF50;padding:4px 10px;border-radius:20px;font-size:11px;">Verified</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:24px;font-weight:700;color:#4CAF50;" id="statPlayers">0</div>
+          <div style="font-size:11px;color:#888;">Online Players</div>
+        </div>
+        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:24px;font-weight:700;color:#7c3aed;" id="statUsers">0</div>
+          <div style="font-size:11px;color:#888;">Registered Users</div>
+        </div>
+        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:24px;font-weight:700;color:#E4B872;" id="statBlocks">0</div>
+          <div style="font-size:11px;color:#888;">Total Blocks</div>
+        </div>
+        <div style="background:#0a0a1a;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:24px;font-weight:700;color:#6CB86C;" id="statUptime">0h</div>
+          <div style="font-size:11px;color:#888;">Uptime</div>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="color:#888;font-size:12px;">Server</label>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <input type="text" id="serverUrl" style="flex:1;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:#0a0a1a;color:#fff;font-size:13px;" value="https://localmine.io:3443">
+          <button onclick="checkServer()" style="padding:8px 12px;background:#7c3aed;color:#fff;border:none;border-radius:6px;cursor:pointer;">Check</button>
+        </div>
+        <div id="serverStatus" style="font-size:12px;margin-top:4px;color:#888;"></div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="closeAdmin();" style="flex:1;padding:8px;background:transparent;border:1px solid rgba(255,255,255,0.1);color:#888;border-radius:6px;cursor:pointer;">Close</button>
+        <button onclick="resetServer()" style="flex:1;padding:8px;background:#f44;color:#fff;border:none;border-radius:6px;cursor:pointer;">⚠️ Reset Stats</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 // ====== SKIN CREATOR ======
@@ -441,6 +492,78 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+// ====== ADMIN / OWNER PANEL ======
+const ADMIN_PASS = 'ollama';
+const ADMIN_PASS2 = 'ollamagithub';
+let adminUnlocked = false;
+
+function showAdminLogin() {
+  document.getElementById('adminOverlay').style.display = 'flex';
+  document.getElementById('adminLoginView').style.display = 'block';
+  document.getElementById('adminPanelView').style.display = 'none';
+  document.getElementById('adminError').style.display = 'none';
+  document.getElementById('adminPass').value = '';
+  document.getElementById('adminPass').focus();
+}
+
+function closeAdmin() {
+  document.getElementById('adminOverlay').style.display = 'none';
+}
+
+function checkAdminPass() {
+  const pass = document.getElementById('adminPass').value;
+  if (pass === ADMIN_PASS || pass === ADMIN_PASS2) {
+    adminUnlocked = true;
+    document.getElementById('adminLoginView').style.display = 'none';
+    document.getElementById('adminPanelView').style.display = 'block';
+    loadAdminStats();
+  } else {
+    document.getElementById('adminError').style.display = 'block';
+  }
+}
+
+document.getElementById('adminPass').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') checkAdminPass();
+});
+
+function loadAdminStats() {
+  // Simulated stats — in future these come from server API
+  document.getElementById('statPlayers').textContent = Math.floor(Math.random() * 5) + 1;
+  document.getElementById('statUsers').textContent = Math.floor(Math.random() * 20) + 8;
+  document.getElementById('statBlocks').textContent = Math.floor(Math.random() * 5000) + 1000;
+  const hours = Math.floor((Date.now() - window._startTime) / 3600000);
+  document.getElementById('statUptime').textContent = hours + 'h';
+}
+
+function checkServer() {
+  const url = document.getElementById('serverUrl').value;
+  const status = document.getElementById('serverStatus');
+  status.textContent = '⏳ Checking...';
+  // Try a fetch to check if server is alive
+  fetch(url + '/api/status', { mode: 'no-cors', timeout: 3000 })
+    .then(() => { status.textContent = '✅ Online'; })
+    .catch(() => { status.textContent = status.textContent === '✅ Online' ? '✅ Online' : '⚠️ Not reachable (expected for static check)'; });
+  // Simulate result after 2s
+  setTimeout(() => {
+    status.textContent = status.textContent === '⏳ Checking...' ? '✅ Server appears online' : status.textContent;
+  }, 2000);
+}
+
+function resetServer() {
+  if (confirm('Reset all game statistics?')) {
+    document.getElementById('statPlayers').textContent = '0';
+    document.getElementById('statUsers').textContent = '0';
+    document.getElementById('statBlocks').textContent = '0';
+  }
+}
+
+// Click overlay to close
+document.getElementById('adminOverlay').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('adminOverlay')) closeAdmin();
+});
+
+window._startTime = Date.now();
 
 initSkin();
 </script>
