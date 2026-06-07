@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LocalMine.net — Minecraft Lite Hub</title>
+<style>
+:root { --primary: #4CAF50; --primary-dark: #388E3C; --accent: #7c3aed; --bg: #0a0a1a; --card: #1a1a2e; --text: #ccc; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(10,10,26,0.95); backdrop-filter: blur(12px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 24px; display: flex; align-items: center; gap: 24px; }
+nav .logo { font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; }
+nav a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+nav a:hover { color: #fff; }
+nav .right { margin-left: auto; display: flex; gap: 16px; align-items: center; }
+.btn { padding: 10px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; text-decoration: none; display: inline-block; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.btn-accent { background: var(--accent); color: #fff; }
+.btn-accent:hover { background: #8b5cf6; transform: translateY(-1px); }
+.btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+.hero { padding: 120px 24px 80px; text-align: center; background: linear-gradient(135deg, #0a0a1a, #1a1a3e, #0a0a2e); }
+.hero h1 { font-size: 56px; background: linear-gradient(90deg, #4CAF50, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px; }
+.hero p { font-size: 18px; color: #aaa; max-width: 600px; margin: 0 auto 32px; }
+.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+.section h2 { font-size: 32px; text-align: center; margin-bottom: 40px; color: #fff; }
+.section h2 span { color: var(--primary); }
+
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.feature-card { background: var(--card); border-radius: 12px; padding: 24px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; }
+.feature-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 8px 30px rgba(76,175,80,0.1); }
+.feature-card .icon { font-size: 36px; margin-bottom: 12px; }
+.feature-card h3 { font-size: 16px; margin-bottom: 8px; }
+.feature-card p { font-size: 13px; color: #888; line-height: 1.5; }
+
+.download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.download-card { background: var(--card); border-radius: 12px; padding: 24px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; }
+.download-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.download-card .icon { font-size: 40px; }
+.download-card h3 { margin: 8px 0; }
+.download-card .detail { color: #888; font-size: 13px; margin-bottom: 16px; }
+.download-card .btn { width: 100%; }
+
+/* Skin Creator */
+.skin-creator { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+.skin-canvas-wrap { background: var(--card); border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
+.skin-canvas-wrap canvas { display: block; image-rendering: pixelated; }
+.skin-controls { display: flex; flex-direction: column; gap: 12px; min-width: 200px; }
+.skin-controls label { font-size: 12px; color: #888; }
+.color-picker-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
+.color-swatch { width: 28px; height: 28px; border-radius: 4px; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; }
+.color-swatch:hover { transform: scale(1.15); }
+.color-swatch.active { border-color: #fff; }
+.skin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Updates */
+.update-list { display: flex; flex-direction: column; gap: 12px; }
+.update-item { background: var(--card); border-radius: 8px; padding: 16px 20px; border-left: 3px solid var(--primary); }
+.update-item .date { color: #555; font-size: 12px; }
+.update-item h3 { font-size: 15px; margin: 4px 0; }
+.update-item p { font-size: 13px; color: #888; }
+
+footer { text-align: center; padding: 40px 24px; color: #555; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); }
+footer a { color: var(--primary); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 32px; }
+  .section { padding: 40px 16px; }
+  .features-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">⛏ LocalMine.net</a>
+  <a href="#features">Features</a>
+  <a href="#download">Download</a>
+  <a href="#skin-creator">Skin Creator</a>
+  <a href="#updates">Updates</a>
+  <div class="right">
+    <a href="https://localmine.io:3443">Play Online</a>
+    <a href="https://mochimochinfo.com" style="color:#7c3aed;">By MochiMoch</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Minecraft Lite</h1>
+  <p>The ultimate browser-based voxel sandbox. Infinite worlds, crafting, multiplayer, day/night cycles — now with a desktop app.</p>
+  <div class="hero-buttons">
+    <a href="https://localmine.io:3443" class="btn btn-primary">▶ Play Online</a>
+    <a href="#download" class="btn btn-accent">⬇ Download App</a>
+    <a href="#skin-creator" class="btn btn-outline">🎨 Skin Creator</a>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <h2>50+ <span>Features</span></h2>
+  <div class="features-grid">
+    <div class="feature-card"><div class="icon">🌍</div><h3>Infinite World</h3><p>Procedurally generated terrain with mountains, caves, forests, deserts, and taiga biomes.</p></div>
+    <div class="feature-card"><div class="icon">🧱</div><h3>45+ Block Types</h3><p>Stone, ores, wood, planks, deepslate, tuff, calcite, obsidian, and more.</p></div>
+    <div class="feature-card"><div class="icon">🌙</div><h3>Day/Night Cycle</h3><p>Dynamic sky with sun, moon, stars, and color transitions.</p></div>
+    <div class="feature-card"><div class="icon">👥</div><h3>Multiplayer</h3><p>Play with friends on the same world. Real-time player movement and block updates.</p></div>
+    <div class="feature-card"><div class="icon">🎒</div><h3>Inventory</h3><p>45-slot inventory with hotbar, drag-and-drop, and item splitting.</p></div>
+    <div class="feature-card"><div class="icon">🔨</div><h3>Crafting</h3><p>2×2 crafting grid with recipes for tools, blocks, and materials.</p></div>
+    <div class="feature-card"><div class="icon">❤️</div><h3>Health & Fall Damage</h3><p>10 hearts, fall damage, and respawn system.</p></div>
+    <div class="feature-card"><div class="icon">🏃</div><h3>Sprint & Sneak</h3><p>Sprint with Ctrl, sneak with Shift, full movement physics.</p></div>
+    <div class="feature-card"><div class="icon">🌳</div><h3>Trees & Nature</h3><p>Oak, birch, spruce trees with leaves. Flowers, tall grass, dead bushes.</p></div>
+    <div class="feature-card"><div class="icon">⛰️</div><h3>Caves</h3><p>Underground cave systems to explore with hidden ores.</p></div>
+    <div class="feature-card"><div class="icon">🔐</div><h3>User Accounts</h3><p>Register, login with password hashing. OAuth support for Google, Apple, Microsoft, Steam.</p></div>
+    <div class="feature-card"><div class="icon">💾</div><h3>Persistent World</h3><p>World saves automatically. Your builds persist across restarts.</p></div>
+    <div class="feature-card"><div class="icon">🪟</div><h3>Desktop App</h3><p>Downloadable macOS app with auto-updates. No browser needed.</p></div>
+    <div class="feature-card"><div class="icon">🎵</div><h3>Sound Effects</h3><p>Walking, breaking, placing, and ambient sounds.</p></div>
+    <div class="feature-card"><div class="icon">✨</div><h3>Block Particles</h3><p>Breaking animation with block-colored particles.</p></div>
+    <div class="feature-card"><div class="icon">🌫️</div><h3>Fog & Atmosphere</h3><p>Distance fog, sky colors, and atmospheric effects.</p></div>
+  </div>
+</section>
+
+<section id="download" class="section" style="background:linear-gradient(135deg,#0f0f2a,#1a1a3e);border-radius:12px;">
+  <h2>⬇ <span>Download</span></h2>
+  <div class="download-grid">
+    <div class="download-card">
+      <div class="icon">🍏</div><h3>macOS Intel</h3>
+      <p class="detail">Version 1.0.0</p>
+      <a href="https://github.com/idksafjfhsadiuj5775-maker/localmine.io/raw/main/download/minecraft-lite-macos-intel.dmg" class="btn btn-primary">Download DMG</a>
+    </div>
+    <div class="download-card">
+      <div class="icon">🍎</div><h3>macOS ARM</h3>
+      <p class="detail">Apple Silicon (M1–M4)</p>
+      <a href="https://github.com/idksafjfhsadiuj5775-maker/localmine.io/raw/main/download/minecraft-lite-macos-arm64.dmg" class="btn btn-primary">Download DMG</a>
+    </div>
+    <div class="download-card">
+      <div class="icon">🪟</div><h3>Windows</h3>
+      <p class="detail">Coming soon</p>
+      <button class="btn btn-outline" disabled>In Progress</button>
+    </div>
+    <div class="download-card">
+      <div class="icon">🐧</div><h3>Linux</h3>
+      <p class="detail">Coming soon</p>
+      <button class="btn btn-outline" disabled>In Progress</button>
+    </div>
+  </div>
+</section>
+
+<section id="skin-creator" class="section">
+  <h2>🎨 <span>Skin Creator</span></h2>
+  <p style="text-align:center;color:#888;margin-bottom:24px;">Design your Minecraft Lite character skin. Click pixels to color them.</p>
+  <div class="skin-creator">
+    <div class="skin-canvas-wrap">
+      <canvas id="skinCanvas" width="128" height="256"></canvas>
+    </div>
+    <div class="skin-controls">
+      <div>
+        <label>Colors</label>
+        <div class="color-picker-grid" id="colorPalette"></div>
+      </div>
+      <div>
+        <label>Tools</label>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-primary" onclick="setSkinTool('pencil')" id="tool-pencil">✏️ Pencil</button>
+          <button class="btn btn-outline" onclick="setSkinTool('fill')" id="tool-fill">🪣 Fill</button>
+          <button class="btn btn-outline" onclick="setSkinTool('eyedropper')" id="tool-eyd">💉 Pick</button>
+        </div>
+      </div>
+      <div class="skin-actions">
+        <button class="btn btn-accent" onclick="clearSkin()">🗑️ Clear</button>
+        <button class="btn btn-primary" onclick="exportSkin()">💾 Save Skin</button>
+        <button class="btn btn-outline" onclick="loadDefaultSkin()">↩️ Default</button>
+      </div>
+      <div>
+        <label>Preview</label>
+        <canvas id="skinPreview" width="64" height="128" style="border-radius:8px;image-rendering:pixelated;margin-top:4px;"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="updates" class="section">
+  <h2>📰 <span>Updates</span></h2>
+  <div class="update-list">
+    <div class="update-item">
+      <div class="date">June 7, 2026</div>
+      <h3>v1.0.0 — First Release!</h3>
+      <p>Initial public release with infinite worlds, crafting, multiplayer, and desktop app.</p>
+    </div>
+    <div class="update-item">
+      <div class="date">Coming Soon</div>
+      <h3>v1.1.0 — Mobs & Hunger</h3>
+      <p>Adding mobs (cows, pigs, zombies), hunger bar, and food items.</p>
+    </div>
+    <div class="update-item">
+      <div class="date">Coming Soon</div>
+      <h3>v1.2.0 — Redstone & Mechanics</h3>
+      <p>Redstone circuits, pistons, doors, and interactive blocks.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Made by <a href="https://mochimochinfo.com">MochiMoch</a> 🌑</p>
+  <p style="margin-top:4px;">Not affiliated with Mojang AB or Microsoft.</p>
+  <p style="margin-top:4px;"><a href="https://github.com/idksafjfhsadiuj5775-maker/localmine.io">GitHub</a> · <a href="https://mochimochinfo.com">About</a></p>
+</footer>
+
+<script>
+// ====== SKIN CREATOR ======
+const canvas = document.getElementById('skinCanvas');
+const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+
+const preview = document.getElementById('skinPreview');
+const pctx = preview.getContext('2d');
+pctx.imageSmoothingEnabled = false;
+
+const COLORS = [
+  '#FFFFFF','#D4D4D4','#AAAAAA','#808080','#555555','#2B2B2B','#000000',
+  '#CB8C8C','#B86C6C','#A04C4C','#8C3C3C',
+  '#E4B872','#D4A04C','#C08828','#A07028',
+  '#6CB86C','#4CA04C','#3C8C3C','#287028',
+  '#6CB8B8','#4CA0A0','#3C8C8C','#287070',
+  '#8C8CB8','#6C6CB8','#4C4CA0','#3C3C8C',
+  '#B86CB8','#A04CA0','#8C3C8C','#702870',
+  '#E4E4A0','#D4D470','#C8C850','#B8B830',
+  '#F0D090','#E0B870','#D0A050','#C09040',
+  '#E0A080','#D08060','#C06040','#B05030',
+];
+
+let skinData = new Uint8Array(64 * 64);
+let selectedColor = COLORS[0];
+let currentTool = 'pencil';
+let mouseDown = false;
+
+function initSkin() {
+  const palette = document.getElementById('colorPalette');
+  COLORS.forEach((c, i) => {
+    const swatch = document.createElement('div');
+    swatch.className = 'color-swatch' + (i === 0 ? ' active' : '');
+    swatch.style.background = c;
+    swatch.onclick = () => {
+      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+      swatch.classList.add('active');
+      selectedColor = c;
+    };
+    palette.appendChild(swatch);
+  });
+  loadDefaultSkin();
+}
+
+function setSkinTool(tool) {
+  currentTool = tool;
+  document.querySelectorAll('#skin-creator .btn').forEach(b => b.className = b.className.replace('btn-primary', 'btn-outline'));
+  document.getElementById('tool-' + tool).className = 'btn btn-primary';
+}
+
+function drawSkin() {
+  const scale = 2;
+  ctx.clearRect(0, 0, 128, 256);
+  for (let y = 0; y < 64; y++) {
+    for (let x = 0; x < 64; x++) {
+      const idx = y * 64 + x;
+      const val = skinData[idx];
+      const color = COLORS[val] || '#000';
+      ctx.fillStyle = color;
+      ctx.fillRect(x * scale, y * scale, scale, scale);
+    }
+  }
+  updatePreview();
+}
+
+function updatePreview() {
+  pctx.clearRect(0, 0, 64, 128);
+  // Head
+  for (let y = 0; y < 8; y++) {
+    for (let x = 8; x < 24; x++) {
+      const idx = y * 64 + x;
+      const val = skinData[idx];
+      pctx.fillStyle = COLORS[val] || '#000';
+      pctx.fillRect(x - 8, y, 1, 1);
+    }
+  }
+  // Body
+  for (let y = 20; y < 32; y++) {
+    for (let x = 12; x < 20; x++) {
+      const idx = y * 64 + x;
+      const val = skinData[idx];
+      pctx.fillStyle = COLORS[val] || '#000';
+      pctx.fillRect(x, y - 4, 1, 1);
+    }
+  }
+  // Arms
+  for (let y = 20; y < 32; y++) {
+    for (let x = 8; x < 12; x++) {
+      const idx = y * 64 + x;
+      const val = skinData[idx];
+      pctx.fillStyle = COLORS[val] || '#000';
+      pctx.fillRect(x - 4, y - 4, 1, 1);
+    }
+    for (let x = 20; x < 24; x++) {
+      const idx = y * 64 + x;
+      const val = skinData[idx];
+      pctx.fillStyle = COLORS[val] || '#000';
+      pctx.fillRect(x + 4, y - 4, 1, 1);
+    }
+  }
+  // Legs
+  for (let y = 32; y < 44; y++) {
+    for (let x = 14; x < 18; x++) {
+      const idx = y * 64 + x;
+      const val = skinData[idx];
+      pctx.fillStyle = COLORS[val] || '#000';
+      pctx.fillRect(x - 2, y + 8, 1, 1);
+    }
+    for (let x = 18; x < 22; x++) {
+      const idx = y * 64 + x;
+      const val = skinData[idx];
+      pctx.fillStyle = COLORS[val] || '#000';
+      pctx.fillRect(x + 2, y + 8, 1, 1);
+    }
+  }
+}
+
+function getPixelPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const x = Math.floor((e.clientX - rect.left) / 2);
+  const y = Math.floor((e.clientY - rect.top) / 2);
+  if (x < 0 || x >= 64 || y < 0 || y >= 64) return null;
+  return { x, y };
+}
+
+function paintPixel(pos) {
+  if (!pos) return;
+  const idx = pos.y * 64 + pos.x;
+  const colorIdx = COLORS.indexOf(selectedColor);
+  if (colorIdx < 0) return;
+
+  if (currentTool === 'pencil') {
+    skinData[idx] = colorIdx;
+  } else if (currentTool === 'fill') {
+    const target = skinData[idx];
+    if (target === colorIdx) return;
+    const stack = [idx];
+    const visited = new Set();
+    while (stack.length) {
+      const i = stack.pop();
+      if (visited.has(i)) continue;
+      visited.add(i);
+      const ix = i % 64, iy = Math.floor(i / 64);
+      if (skinData[i] !== target) continue;
+      skinData[i] = colorIdx;
+      if (ix > 0) stack.push(i - 1);
+      if (ix < 63) stack.push(i + 1);
+      if (iy > 0) stack.push(i - 64);
+      if (iy < 63) stack.push(i + 64);
+    }
+  } else if (currentTool === 'eyedropper') {
+    selectedColor = COLORS[skinData[idx]] || COLORS[0];
+    document.querySelectorAll('.color-swatch').forEach(s => {
+      s.classList.toggle('active', s.style.background === selectedColor);
+    });
+  }
+  drawSkin();
+}
+
+canvas.addEventListener('mousedown', (e) => {
+  mouseDown = true;
+  paintPixel(getPixelPos(e));
+});
+canvas.addEventListener('mousemove', (e) => {
+  if (mouseDown && currentTool === 'pencil') paintPixel(getPixelPos(e));
+});
+canvas.addEventListener('mouseup', () => { mouseDown = false; });
+canvas.addEventListener('mouseleave', () => { mouseDown = false; });
+
+function clearSkin() {
+  skinData.fill(0);
+  drawSkin();
+}
+
+function loadDefaultSkin() {
+  // Simple default skin (humanoid)
+  skinData.fill(0);
+  // Head
+  for (let y = 0; y < 8; y++)
+    for (let x = 8; x < 24; x++)
+      skinData[y * 64 + x] = COLORS.indexOf('#E4B872');
+  // Hair
+  for (let y = 0; y < 3; y++)
+    for (let x = 8; x < 24; x++)
+      skinData[y * 64 + x] = COLORS.indexOf('#555555');
+  // Eyes
+  skinData[3 * 64 + 12] = COLORS.indexOf('#000000');
+  skinData[3 * 64 + 19] = COLORS.indexOf('#000000');
+  // Body
+  for (let y = 20; y < 32; y++)
+    for (let x = 12; x < 20; x++)
+      skinData[y * 64 + x] = COLORS.indexOf('#4CA04C');
+  // Arms
+  for (let y = 20; y < 32; y++) {
+    for (let x = 8; x < 12; x++) skinData[y * 64 + x] = COLORS.indexOf('#4CA04C');
+    for (let x = 20; x < 24; x++) skinData[y * 64 + x] = COLORS.indexOf('#4CA04C');
+  }
+  // Legs
+  for (let y = 32; y < 44; y++) {
+    for (let x = 12; x < 18; x++) skinData[y * 64 + x] = COLORS.indexOf('#3C3C8C');
+    for (let x = 18; x < 24; x++) skinData[y * 64 + x] = COLORS.indexOf('#3C3C8C');
+  }
+  // Shoes
+  for (let y = 40; y < 44; y++) {
+    for (let x = 12; x < 18; x++) skinData[y * 64 + x] = COLORS.indexOf('#555555');
+    for (let x = 18; x < 24; x++) skinData[y * 64 + x] = COLORS.indexOf('#555555');
+  }
+  drawSkin();
+}
+
+function exportSkin() {
+  const exportCanvas = document.createElement('canvas');
+  exportCanvas.width = 64;
+  exportCanvas.height = 64;
+  const ectx = exportCanvas.getContext('2d');
+  for (let y = 0; y < 64; y++) {
+    for (let x = 0; x < 64; x++) {
+      ectx.fillStyle = COLORS[skinData[y * 64 + x]] || '#000';
+      ectx.fillRect(x, y, 1, 1);
+    }
+  }
+  const link = document.createElement('a');
+  link.download = 'minecraft-lite-skin.png';
+  link.href = exportCanvas.toDataURL();
+  link.click();
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+initSkin();
+</script>
+</body>
+</html>
